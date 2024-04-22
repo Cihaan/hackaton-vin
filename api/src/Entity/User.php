@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use App\Controller\SecurityController;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -11,7 +13,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'method' => 'GET',
+            'path' => '/api/my_custom_route',
+            'controller' => self::class,
+            'action' => 'myCustomAction',
+            'openapi_context' => [
+                'summary' => 'My custom action',
+                'description' => 'This is a custom action',
+            ],
+        ],
+    ],
+    itemOperations: [],
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -33,6 +49,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column]
+    private ?bool $isConfirmed = null;
 
     public function getId(): ?int
     {
@@ -107,5 +126,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isConfirmed(): ?bool
+    {
+        return $this->isConfirmed;
+    }
+
+    public function setConfirmed(bool $isConfirmed): static
+    {
+        $this->isConfirmed = $isConfirmed;
+
+        return $this;
     }
 }

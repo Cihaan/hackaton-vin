@@ -21,6 +21,9 @@ class Note
     #[ORM\ManyToOne(inversedBy: 'notes')]
     private ?Wine $wine = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,6 +49,18 @@ class Note
     public function setWine(?Wine $wine): static
     {
         $this->wine = $wine;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }

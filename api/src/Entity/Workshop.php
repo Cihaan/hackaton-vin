@@ -42,6 +42,18 @@ class Workshop
     #[ORM\ManyToMany(targetEntity: Wine::class, inversedBy: 'workshops')]
     private Collection $wines;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $deadline = null;
+
+    #[ORM\ManyToOne(inversedBy: 'workshops')]
+    private ?School $school = null;
+
+    #[ORM\Column]
+    private ?bool $isCanceled = null;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -144,6 +156,54 @@ class Workshop
     public function removeWine(Wine $wine): static
     {
         $this->wines->removeElement($wine);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDeadline(): ?\DateTimeInterface
+    {
+        return $this->deadline;
+    }
+
+    public function setDeadline(\DateTimeInterface $deadline): static
+    {
+        $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): static
+    {
+        $this->school = $school;
+
+        return $this;
+    }
+
+    public function isCanceled(): ?bool
+    {
+        return $this->isCanceled;
+    }
+
+    public function setCanceled(bool $isCanceled): static
+    {
+        $this->isCanceled = $isCanceled;
 
         return $this;
     }
