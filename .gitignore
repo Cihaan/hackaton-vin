@@ -3,8 +3,8 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
+/api/config/secrets/prod/prod.decrypt.private.php
+/api/public/bundles/
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
@@ -20,6 +20,9 @@
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/asset-mapper ###
-/public/assets/
-/assets/vendor/
+/api/public/assets/
+/api/assets/vendor/
 ###< symfony/asset-mapper ###
+
+.vscode
+.idea
