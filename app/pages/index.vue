@@ -11,7 +11,7 @@
       </div>
 
       <UButton
-          class="rounded-none w-1/5 h-14 border-2 border-secondary "
+          class="rounded-none w-1/5 h-14 border-2 border-secondary-500"
           color="primary"
           :trailing="false"
       >
@@ -36,7 +36,15 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua</p>
+          <UButton
+              class="rounded-none w-4/5 h-14  "
+              color="primary"
+              :trailing="false"
+          >
+            <span class="text-secondary-50 mx-auto text-xl">S'inscrire à un Atelier</span>
+          </UButton>
         </div>
+
       </div>
       <div class="relative h-1/2 ps-20">
         <img src="../public/img/atelier1.png" alt="degustation-vin" class="w-64 h-96 object-cover">
