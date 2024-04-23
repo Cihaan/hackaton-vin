@@ -45,14 +45,16 @@
       </div>
     </div>
   </section>
-  <section class="animateur">
-    <div class="flex pr-96 pt-10 pl-96">
-      <div class="w-1/2 pr-36 mt-4">
-        <p class="text-5xl">Animateur</p>
-        <img src="../public/img/animateur.png" class="mt-10 max-w-max	mb-10" alt="bg max">
+  <section class="h-screen flex flex-col justify-center animateur">
+    <div class="container mx-auto grid grid-cols-2 h-4/5  ">
+      <div class="flex flex-col items-center gap-4">
+        <div class="flex flex-col  gap-4 w-3/6 ">
+      <p class="text-5xl">Animateur</p>
+        <img src="../public/img/animateur.png" class="mt-10 max-w-max" alt="bg max">
       </div>
-      <div>
-        <p class="text-2xl leading-relaxed mt-24">
+      </div>
+      <div class="relative h-1/2 mt-24">
+        <p class="text-2xl leading-relaxed">
           Plongez dans l'univers passionnant du vin avec notre hôte passionné, un connaisseur émérite désireux de
           partager sa fascination pour les vins de toute la France. À travers des dégustations soigneusement
           orchestrées, vous découvrirez un panorama des saveurs et des terroirs, des coteaux de Bordeaux aux vallées de
