@@ -1,22 +1,19 @@
 <script setup lang="ts">
 
+import LinkNav from "~/components/Atoms/LinkNav.vue";
 </script>
 
 <template>
   <section class="accueil">
     <div class="container mx-auto flex flex-col py-32 gap-24">
       <div>
-        <h1 class="text-white text-7xl leading-tight"> Découverte et <br> Dégustation <br> des Vins </h1>
-        <h3 class="text-white text-3xl mt-8">Un Voyage à travers les Saveurs</h3>
+        <h1 class="text-secondary-500 text-7xl leading-tight"> Découverte et <br> Dégustation <br> des Vins </h1>
+        <h3 class="text-secondary-500 text-3xl mt-8">Un Voyage à travers les Saveurs</h3>
       </div>
-
-      <UButton
-          class="rounded-none w-1/5 h-14 border-2 border-secondary-500"
-          color="primary"
-          :trailing="false"
-      >
-        <span class="text-secondary-500 mx-auto text-xl">S'inscrire à un Atelier</span>
-      </UButton>
+      <LinkNav to="/workshop" class=" w-1/5 h-14">
+        <span
+            class=" border-2 border-secondary-500 bg-wine-100  hover:bg-secondary-500  text-secondary-500 w-full h-full hover:text-wine-600 text-secondary-500 flex items-center justify-center text-xl">S'inscrire à un Atelier</span>
+      </LinkNav>
     </div>
   </section>
 
@@ -36,13 +33,11 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua</p>
-          <UButton
-              class="rounded-none w-4/5 h-14  "
-              color="primary"
-              :trailing="false"
-          >
-            <span class="text-secondary-50 mx-auto text-xl">S'inscrire à un Atelier</span>
-          </UButton>
+
+          <LinkNav to="/workshop" class=" w-4/5 h-14">
+        <span
+            class=" border-2 border-wine-600 bg-secondary-50  hover:bg-wine-600  text-wine-600 w-full h-full hover:text-secondary-500 flex items-center justify-center text-xl">S'inscrire à un Atelier</span>
+          </LinkNav>
         </div>
 
       </div>
