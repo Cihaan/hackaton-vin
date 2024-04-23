@@ -26,6 +26,9 @@ class School
     #[ORM\OneToMany(targetEntity: Workshop::class, mappedBy: 'school')]
     private Collection $workshops;
 
+    #[ORM\Column(length: 10000, nullable: true)]
+    private ?string $imagePath = null;
+
     public function __construct()
     {
         $this->workshops = new ArrayCollection();
@@ -74,6 +77,18 @@ class School
                 $workshop->setSchool(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath(?string $imagePath): static
+    {
+        $this->imagePath = $imagePath;
 
         return $this;
     }

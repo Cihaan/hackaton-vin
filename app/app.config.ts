@@ -1,3 +1,6 @@
-export default {
-    // your config properties here
-};
+export default defineAppConfig({
+    ui: {
+        primary: 'wine',
+        secondary: 'secondary',
+    }
+})

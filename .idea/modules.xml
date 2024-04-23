@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/apihackathon.iml" filepath="$PROJECT_DIR$/.idea/apihackathon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hackaton-vin.iml" filepath="$PROJECT_DIR$/.idea/hackaton-vin.iml" />
     </modules>
   </component>
 </project>
