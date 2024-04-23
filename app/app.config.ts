@@ -1,3 +1,6 @@
 export default {
-    // your config properties here
+    ui: {
+        primary: 'red-wine',
+        gray : 'neutral'
+    }
 };
