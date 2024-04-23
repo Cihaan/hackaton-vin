@@ -5,6 +5,5 @@ export default defineNuxtConfig({
   modules: ["@nuxt/ui", "@nuxt/image","@pinia/nuxt"],
   ui: {
     global: true,
-    icons: [],
   },
 })
