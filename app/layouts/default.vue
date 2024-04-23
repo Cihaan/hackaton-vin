@@ -14,7 +14,8 @@
     </div>
 
   </div>
-  <LayoutsFooter />
+  <LayoutsFooter class="mt-10"/>
+
 </template>
 
 <style scoped>

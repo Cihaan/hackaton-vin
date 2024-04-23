@@ -1,7 +1,7 @@
 import type {WorkshopType} from "~/types/WorkshopType";
 
 
-export const useWorkshopStore = defineStore('workshop', () => {
+export const useWorkshopStore = defineStore('list-workshop', () => {
     const listWorkshop = ref<WorkshopType[]>([])
 
     async function getWorkShop() {
