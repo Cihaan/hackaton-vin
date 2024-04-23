@@ -15,7 +15,7 @@ import LinkNav from "~/components/Atoms/LinkNav.vue";
 
       <div class="flex gap-4">
 
-        <LinkNav to="/accueil">
+        <LinkNav to="/">
           Accueil
         </LinkNav>
 
