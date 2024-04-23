@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\WineRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: WineRepository::class)]
@@ -43,6 +44,24 @@ class Wine
      */
     #[ORM\ManyToMany(targetEntity: Workshop::class, mappedBy: 'wines')]
     private Collection $workshops;
+
+    #[ORM\ManyToOne(inversedBy: 'wines')]
+    private ?Domain $domain = null;
+
+    #[ORM\Column(length: 10000)]
+    private ?string $picture = null;
+
+    #[ORM\Column]
+    private ?int $serviceTemperature = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $serviceKind = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $conservation = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $limiteDate = null;
 
     public function __construct()
     {
@@ -168,6 +187,78 @@ class Wine
         if ($this->workshops->removeElement($workshop)) {
             $workshop->removeWine($this);
         }
+
+        return $this;
+    }
+
+    public function getDomain(): ?Domain
+    {
+        return $this->domain;
+    }
+
+    public function setDomain(?Domain $domain): static
+    {
+        $this->domain = $domain;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(string $picture): static
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getServiceTemperature(): ?int
+    {
+        return $this->serviceTemperature;
+    }
+
+    public function setServiceTemperature(int $serviceTemperature): static
+    {
+        $this->serviceTemperature = $serviceTemperature;
+
+        return $this;
+    }
+
+    public function getServiceKind(): ?string
+    {
+        return $this->serviceKind;
+    }
+
+    public function setServiceKind(string $serviceKind): static
+    {
+        $this->serviceKind = $serviceKind;
+
+        return $this;
+    }
+
+    public function getConservation(): ?string
+    {
+        return $this->conservation;
+    }
+
+    public function setConservation(string $conservation): static
+    {
+        $this->conservation = $conservation;
+
+        return $this;
+    }
+
+    public function getLimiteDate(): ?\DateTimeInterface
+    {
+        return $this->limiteDate;
+    }
+
+    public function setLimiteDate(\DateTimeInterface $limiteDate): static
+    {
+        $this->limiteDate = $limiteDate;
 
         return $this;
     }

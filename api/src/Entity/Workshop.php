@@ -54,6 +54,12 @@ class Workshop
     #[ORM\Column]
     private ?bool $isCanceled = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $location = null;
+
+    #[ORM\Column]
+    private ?int $price = null;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -204,6 +210,30 @@ class Workshop
     public function setCanceled(bool $isCanceled): static
     {
         $this->isCanceled = $isCanceled;
+
+        return $this;
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->location;
+    }
+
+    public function setLocation(string $location): static
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): static
+    {
+        $this->price = $price;
 
         return $this;
     }
