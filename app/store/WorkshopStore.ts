@@ -9,8 +9,6 @@ export const useWorkshopStore = defineStore('workshop', () => {
         if(data.value){
             // @ts-ignore
             listWorkshop.value = data.value['hydra:member']
-            console.log(data)
-
         }
     }
 

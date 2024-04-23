@@ -23,7 +23,7 @@ import LinkNav from "~/components/Atoms/LinkNav.vue";
           Ateliers
         </LinkNav>
 
-        <LinkNav to="/accueil">
+        <LinkNav to="/">
           Administration
         </LinkNav>
 

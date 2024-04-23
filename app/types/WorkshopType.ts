@@ -3,10 +3,11 @@ export type WorkshopType = {
     school_id: number;
     name: string;
     date: string;
-    limit_drinker : number;
+    limitDrinker: number;
     password: string;
     theme: string;
     description: string;
     deadline: string;
     drinkers: [];
+    price: number;
 }
