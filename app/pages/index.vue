@@ -20,11 +20,11 @@
     </div>
   </section>
 
-  <section class="h-screen flex flex-col justify-center">
+  <section class="h-[750px] flex flex-col justify-center">
     <div class="container mx-auto grid grid-cols-2 h-4/5  ">
       <div class="flex flex-col items-center gap-4">
         <div class="flex flex-col  gap-4 w-3/6 ">
-          <h2 class="text-wine-600 text-4xl font-bold">Nos Ateliers</h2>
+          <h2 class="text-wine-600 text-5xl font-bold">Nos Ateliers</h2>
           <p class="text-wine-600 text-lg mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -38,10 +38,10 @@
             tempor incididunt ut labore et dolore magna aliqua</p>
         </div>
       </div>
-      <div class="relative h-1/2">
+      <div class="relative h-1/2 ps-20">
         <img src="../public/img/atelier1.png" alt="degustation-vin" class="w-64 h-96 object-cover">
         <img src="../public/img/atelier2.png" alt="degustation-vin"
-             class="w-64 h-96 object-cover absolute top-72 left-36">
+             class="w-64 h-96 object-cover absolute top-72 left-60">
       </div>
     </div>
   </section>
