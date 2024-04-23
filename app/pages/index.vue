@@ -11,7 +11,7 @@
       </div>
 
       <UButton
-          class="rounded-none w-1/5 h-14 border-2 border-secondary "
+          class="rounded-none w-1/5 h-14 border-2 border-secondary-500"
           color="primary"
           :trailing="false"
       >
@@ -24,8 +24,8 @@
     <div class="container mx-auto grid grid-cols-2 h-4/5  ">
       <div class="flex flex-col items-center gap-4">
         <div class="flex flex-col  gap-4 w-3/6 ">
-          <h2 class="text-wine-600 text-5xl font-bold">Nos Ateliers</h2>
-          <p class="text-wine-600 text-lg mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+          <h2 class="text-wine-600 text-5xl font-bold">ATELIER</h2>
+          <p class="text-black text-lg mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
@@ -36,7 +36,15 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua</p>
+          <UButton
+              class="rounded-none w-4/5 h-14  "
+              color="primary"
+              :trailing="false"
+          >
+            <span class="text-secondary-50 mx-auto text-xl">S'inscrire à un Atelier</span>
+          </UButton>
         </div>
+
       </div>
       <div class="relative h-1/2 ps-20">
         <img src="../public/img/atelier1.png" alt="degustation-vin" class="w-64 h-96 object-cover">
@@ -45,26 +53,36 @@
       </div>
     </div>
   </section>
-  <section class="h-screen flex flex-col justify-center animateur">
+  <section class="h-fit flex flex-col justify-center animateur">
     <div class="container mx-auto grid grid-cols-2 h-4/5  ">
-      <div class="flex flex-col items-center gap-4">
-        <div class="flex flex-col  gap-4 w-3/6 ">
-      <p class="text-5xl">Animateur</p>
-        <img src="../public/img/animateur.png" class="mt-10 max-w-max" alt="bg max">
+      <div class="flex flex-col items-center h-full gap-4">
+        <div class="flex flex-col  h-full gap-4 w-3/6 ">
+          <h2 class="text-secondary-500 text-5xl font-bold">ANIMATEUR</h2>
+          <img src="../public/img/animateur.png" class="mt-10 w-96   object-cover max-w-max" alt="bg max">
+        </div>
       </div>
-      </div>
-      <div class="relative h-1/2 mt-24">
-        <p class="text-2xl leading-relaxed">
-          Plongez dans l'univers passionnant du vin avec notre hôte passionné, un connaisseur émérite désireux de
-          partager sa fascination pour les vins de toute la France. À travers des dégustations soigneusement
-          orchestrées, vous découvrirez un panorama des saveurs et des terroirs, des coteaux de Bordeaux aux vallées de
-          la Loire.
+      <div class="flex flex-col gap-6 h-1/2 w-5/6 mt-24">
+        <p class="text-lg leading-relaxed">
+          Passionné par tous types de Savoirs : Spatial, Mathématiques, Physique, Informatique, Intelligence
+          Artificielle, Oenologie…
+
         </p>
-        <p class="text-2xl leading-relaxed mt-12">
-          Que vous soyez novice ou amateur éclairé, chaque dégustation offre une expérience sensorielle enrichissante,
-          où les vins sélectionnés avec soin révèlent les secrets des vignobles français. Rejoignez-nous pour une
-          exploration vinicole captivante, où le plaisir de découvrir de nouveaux crus et de partager des moments
-          conviviaux est aussi abondant que les grappes mûres à la vendange.
+        <p class="text-lg leading-relaxed">
+
+          Ma pratique : Faire (re)découvrir les Sciences sous de nouveaux angles (historiques, humains, ludiques, ...)
+          et lier celles-ci à l'Actualité et au Monde d'aujourd'hui et de demain. L'évolution rapide des IA (Midjourney,
+          Dall-e, Chat GPT, Avia, Stable Diffusion,...) en est un parfait exemple et se trouve au coeur de mes
+          différents cours pour illustrer l'interaction entre Connaissances et Applications pratiques.
+
+        </p>
+        <p class="text-lg leading-relaxed ">
+          MOOCS & CERTIFICATIONS :
+          - Défis et enjeux de la Cybersécurité (Université Bretagne Sud) Score 84 %
+          - Exercer son esprit critique : données et raisonnements fallacieux Score 116 % ;-)
+          - La science moderne de la Renaissance aux Lumières (Université Paris 1 Panthéon Sorbonne) Score 86 %
+          - Deep Learning (CNAM) Score 78 %
+          - Introduction a la statistique par R (Université Paris Sud) Score 96 %
+          - La Science Fiction : (Université d'Artois) Score 96 %
         </p>
       </div>
     </div>
