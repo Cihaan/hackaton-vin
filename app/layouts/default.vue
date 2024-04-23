@@ -7,13 +7,14 @@
   <div>
 
     <LayoutsNavbar />
+    
 
     <div>
       <slot />
     </div>
 
   </div>
-
+  <LayoutsFooter />
 </template>
 
 <style scoped>
