@@ -4,23 +4,72 @@
 
 <template>
   <section class="accueil">
-    <div class="flex flex-col py-32 px-20 gap-24">
+    <div class="container mx-auto flex flex-col py-32 gap-24">
       <div>
         <h1 class="text-white text-7xl leading-tight"> Découverte et <br> Dégustation <br> des Vins </h1>
-        <h3  class="text-white text-3xl mt-8">Un Voyage à travers les Saveurs</h3>
+        <h3 class="text-white text-3xl mt-8">Un Voyage à travers les Saveurs</h3>
       </div>
 
       <UButton
-          icon="i-heroicons-pencil-square"
-          size="sm"
-          class="w-52 border-2 border-white"
+          class="rounded-none w-1/5 h-14 border-2 border-secondary "
           color="primary"
-          variant="solid"
-          label="S'inscrire à un atelier"
           :trailing="false"
-      />
+      >
+        <span class="text-secondary-500 mx-auto text-xl">S'inscrire à un Atelier</span>
+      </UButton>
     </div>
   </section>
+
+  <section class="h-[750px] flex flex-col justify-center">
+    <div class="container mx-auto grid grid-cols-2 h-4/5  ">
+      <div class="flex flex-col items-center gap-4">
+        <div class="flex flex-col  gap-4 w-3/6 ">
+          <h2 class="text-wine-600 text-5xl font-bold">Nos Ateliers</h2>
+          <p class="text-wine-600 text-lg mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua</p>
+        </div>
+      </div>
+      <div class="relative h-1/2 ps-20">
+        <img src="../public/img/atelier1.png" alt="degustation-vin" class="w-64 h-96 object-cover">
+        <img src="../public/img/atelier2.png" alt="degustation-vin"
+             class="w-64 h-96 object-cover absolute top-72 left-60">
+      </div>
+    </div>
+  </section>
+  <section class="h-screen flex flex-col justify-center animateur">
+    <div class="container mx-auto grid grid-cols-2 h-4/5  ">
+      <div class="flex flex-col items-center gap-4">
+        <div class="flex flex-col  gap-4 w-3/6 ">
+      <p class="text-5xl">Animateur</p>
+        <img src="../public/img/animateur.png" class="mt-10 max-w-max" alt="bg max">
+      </div>
+      </div>
+      <div class="relative h-1/2 mt-24">
+        <p class="text-2xl leading-relaxed">
+          Plongez dans l'univers passionnant du vin avec notre hôte passionné, un connaisseur émérite désireux de
+          partager sa fascination pour les vins de toute la France. À travers des dégustations soigneusement
+          orchestrées, vous découvrirez un panorama des saveurs et des terroirs, des coteaux de Bordeaux aux vallées de
+          la Loire.
+        </p>
+        <p class="text-2xl leading-relaxed mt-12">
+          Que vous soyez novice ou amateur éclairé, chaque dégustation offre une expérience sensorielle enrichissante,
+          où les vins sélectionnés avec soin révèlent les secrets des vignobles français. Rejoignez-nous pour une
+          exploration vinicole captivante, où le plaisir de découvrir de nouveaux crus et de partager des moments
+          conviviaux est aussi abondant que les grappes mûres à la vendange.
+        </p>
+      </div>
+    </div>
+  </section>
+
 
 </template>
 
@@ -29,6 +78,14 @@
 .accueil {
   position: relative; /* Contains the pseudo-element */
   min-height: 700px; /* Matches the height of the pseudo-element */
+}
+
+.animateur {
+  position: relative; /* Contains the pseudo-element */
+  min-height: 700px; /* Matches the height of the pseudo-element */
+  background-color: #BC313E;
+  color: white;
+
 }
 
 .accueil::before {

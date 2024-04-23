@@ -6,10 +6,10 @@ import LinkNav from "~/components/Atoms/LinkNav.vue";
 <template>
 
   <header>
-    <nav class="flex items-center justify-between py-6 px-32" aria-label="Global">
+    <nav class="container flex items-center justify-between mx-auto" aria-label="Global">
       <div class="flex lg:flex-1">
-        <NuxtLink to="/" class="-m-1.5 p-1.5">
-          <NuxtImg class="h-16 w-auto" src="img/logo.png" alt="Logo" />
+        <NuxtLink to="/">
+          <NuxtImg class="h-16 w-auto" src="img/logo.png" alt="Logo"/>
         </NuxtLink>
       </div>
 

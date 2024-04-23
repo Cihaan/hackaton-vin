@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
 
-  <nuxt-link class="text-red-wine-500 font-bold" :to="to">
+  <nuxt-link class="text-wine-600 font-bold" :to="to">
     <slot />
   </nuxt-link>
 

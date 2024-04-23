@@ -24,20 +24,12 @@ class Wine
     #[ORM\Column]
     private ?int $year = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $grape_variety = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
     private ?string $type = null;
-
-    /**
-     * @var Collection<int, Note>
-     */
-    #[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'wine')]
-    private Collection $notes;
 
     /**
      * @var Collection<int, Workshop>
@@ -62,6 +54,12 @@ class Wine
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $limiteDate = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $comment = null;
+
+    #[ORM\Column(type: Types::ARRAY)]
+    private array $grapeVariety = [];
 
     public function __construct()
     {
@@ -98,18 +96,6 @@ class Wine
         return $this;
     }
 
-    public function getGrapeVariety(): ?string
-    {
-        return $this->grape_variety;
-    }
-
-    public function setGrapeVariety(string $grape_variety): static
-    {
-        $this->grape_variety = $grape_variety;
-
-        return $this;
-    }
-
     public function getQuantity(): ?int
     {
         return $this->quantity;
@@ -130,36 +116,6 @@ class Wine
     public function setType(string $type): static
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Note>
-     */
-    public function getNotes(): Collection
-    {
-        return $this->notes;
-    }
-
-    public function addNote(Note $note): static
-    {
-        if (!$this->notes->contains($note)) {
-            $this->notes->add($note);
-            $note->setWine($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): static
-    {
-        if ($this->notes->removeElement($note)) {
-            // set the owning side to null (unless already changed)
-            if ($note->getWine() === $this) {
-                $note->setWine(null);
-            }
-        }
 
         return $this;
     }
@@ -259,6 +215,30 @@ class Wine
     public function setLimiteDate(\DateTimeInterface $limiteDate): static
     {
         $this->limiteDate = $limiteDate;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(string $comment): static
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getGrapeVariety(): array
+    {
+        return $this->grapeVariety;
+    }
+
+    public function setGrapeVariety(array $grapeVariety): static
+    {
+        $this->grapeVariety = $grapeVariety;
 
         return $this;
     }
