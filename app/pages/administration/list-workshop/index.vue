@@ -104,17 +104,19 @@ workshopStore.getWorkShop().then(() => {
     <div v-if="isLoaded">
       <NavAdministration />
 
-      <DatePicker />
-      <div class="container mx-auto">
 
-        <div class="flex px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto lg:px-0 px-10">
+
+        <div class="flex gap-2 px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
           <USelectMenu v-model="selectedColumns" :options="columns" multiple placeholder="Columns" />
+
+          <DatePicker />
         </div>
 
         <UTable :columns="selectedColumns" :rows="useWorkshopStore().listWorkshop" >
 
           <template #actions-data="{ row }">
-            <NuxtLink to="/" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
+            <NuxtLink to="form/1" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
             <UButton icon="i-heroicons-trash-16-solid" />
           </template>
 
