@@ -8,5 +8,5 @@ export type WorkshopType = {
     theme: string;
     description: string;
     deadline: string;
-    drinkers: string;
+    drinkers: [];
 }
