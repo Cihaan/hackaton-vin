@@ -1,41 +1,18 @@
 <script setup lang="ts">
 
 import LinkNav from "~/components/Atoms/LinkNav.vue";
+import Accueil from "~/components/Sections/Accueil.vue";
+import Atelier from "~/components/Sections/Atelier.vue";
+import Animateur from "~/components/Sections/Animateur.vue";
+
 </script>
 
 <template>
-  
 
+  <Accueil />
+  <Atelier />
+  <Animateur />
 
 </template>
 
-<style scoped>
-
-.accueil {
-  position: relative; /* Contains the pseudo-element */
-  min-height: 700px; /* Matches the height of the pseudo-element */
-}
-
-.animateur {
-  position: relative; /* Contains the pseudo-element */
-  min-height: 700px; /* Matches the height of the pseudo-element */
-  background-color: #BC313E;
-  color: white;
-
-}
-
-.accueil::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 700px;
-  background-image: url("../public/img/background-vin.png");
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-}
-
-.second-section {
-  /* Additional styling as needed */
-}
-</style>
+<style scoped></style>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import Accueil from "~/components/Sections/Accueil.vue";
-import Atelier from "~/components/Sections/Atelier.vue";
-import Animateur from "~/components/Sections/Animateur.vue";
+
 </script>
 
 
@@ -11,13 +9,7 @@ import Animateur from "~/components/Sections/Animateur.vue";
 
 
   <div>
-    <Accueil />
-    <Atelier />
-    <Animateur />
+ <slot  />
   </div>
-  <LayoutsFooter class="mt-10"/>
-
-
-
   <LayoutsFooter />
 </template>
