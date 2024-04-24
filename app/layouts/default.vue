@@ -7,12 +7,14 @@
   <div>
 
     <LayoutsNavbar />
+    
 
     <div>
       <slot />
     </div>
 
   </div>
+  <LayoutsFooter class="mt-10"/>
 
 </template>
 

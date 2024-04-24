@@ -17,8 +17,30 @@ export default <Partial<Config>>{
                     '800': '#bc313e',
                     '900': '#bc313e',
                     '950': '#bc313e',
-                }
+                },
+                'secondary': {
+                    '50': '#FFFEED',
+                    '100': '#FFFEED',
+                    '200': '#FFFEED',
+                    '300': '#FFFEED',
+                    '400': '#FFFEED',
+                    '500': '#FFFEED',
+                    '600': '#FFFEED',
+                    '700': '#FFFEED',
+                    '800': '#FFFEED',
+                    '900': '#FFFEED',
+                    '950': '#FFFEED',
+                },
             },
-        }
+        },
+        container: {
+            padding: {
+                DEFAULT: '1rem',
+                sm: '2rem',
+                lg: '4rem',
+                xl: '5rem',
+                '2xl': '6rem',
+            },
+        },
     }
 }
