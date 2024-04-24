@@ -3,6 +3,7 @@
 import NavAdministration from "~/components/Administrations/NavAdministration.vue";
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
+import TrueDatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {format} from "date-fns";
 
 const columns = [
@@ -11,41 +12,13 @@ const columns = [
     label: 'Atelier'
   },
   {
-    key: 'date',
-    label: 'Date'
-  },
-  {
-    key: 'school_id',
-    label: 'Lieu'
-  },
-  {
-    key: 'limitDrinker',
-    label: 'Nombres Places'
-  },
-  {
-    key: 'theme',
-    label: 'Thème'
-  }
-  , {
-    key: 'description',
-    label: 'Description'
-  }
-  , {
-    key: 'deadline',
-    label: 'Deadline'
-  }
-  , {
-    key: 'price',
-    label: 'Prix'
-  }
-
-  , {
     key: 'actions',
     label: 'Actions'
   }
 ]
 
 const selectedColumns = ref([...columns])
+
 const isLoaded = ref(false);
 const workshopStore = useWorkshopStore();
 
@@ -87,7 +60,11 @@ definePageMeta({
           </template>
 
           <template #actions-data="{ row }">
-            <NuxtLink :to="`list-workshop/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
+            <UToggle
+                on-icon="i-heroicons-check-20-solid"
+                off-icon="i-heroicons-x-mark-20-solid"
+                :model-value="row.is_confirmed"
+            />
           </template>
 
         </UTable>
