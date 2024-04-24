@@ -9,12 +9,15 @@ const password = ref('');
 </script>
 
 <template>
-  <UContainer>
+  <UContainer
+      class="py-20"
+  >
     <UCard
         class="bg-white h-[600px]"
     >
       <template #header>
-        <h1>Login</h1>
+        <h1>Connexion</h1>
+
         <UAlert
             v-if="userStore.isError"
             icon="i-heroicons-shield-exclamation"
@@ -25,9 +28,15 @@ const password = ref('');
         />
       </template>
 
-      <template #default>
+      <UAlert
+          class="mb-4"
+          icon="i-heroicons-identification"
+          variant="solid"
+          title="Formulaire de connexion"
+          description="Vueillez renseigner vos identifiants et mot de passe pour vous connecter à l'application en tant qu'administrateur"
+      />
+
         <LoginForm  v-model:email="email" v-model:password="password"/>
-      </template>
 
       <template #footer>
         <UButton

@@ -4,7 +4,7 @@ const password = defineModel<string>('password')
 </script>
 
 <template>
-  <UFormGroup label="Email" name="email">
+  <UFormGroup label="Email" name="email" class="mb-5">
     <UInput v-model="email"/>
   </UFormGroup>
 
