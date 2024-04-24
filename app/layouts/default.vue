@@ -1,23 +1,15 @@
 <script setup lang="ts">
+
 </script>
 
 
 <template>
 
+  <LayoutsNavbar />
+
+
   <div>
-
-    <LayoutsNavbar />
-    
-
-    <div>
-      <slot />
-    </div>
-
+ <slot  />
   </div>
-  <LayoutsFooter class="mt-10"/>
-
+  <LayoutsFooter />
 </template>
-
-<style scoped>
-
-</style>
