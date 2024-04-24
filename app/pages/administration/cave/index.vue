@@ -19,6 +19,12 @@ const links = [
   to: '/components/command-palette'
 }
   ]
+
+definePageMeta({
+  requiresAuth: true,
+  middleware: 'guard-global'
+})
+
 </script>
 
 <template>

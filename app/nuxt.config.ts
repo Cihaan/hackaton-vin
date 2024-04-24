@@ -6,5 +6,9 @@ export default defineNuxtConfig({
   ui: {
     global: true,
   },
-
+  // ssr: false,
+  colorMode: {
+    fallback: 'light',
+    preference: 'light'
+  },
 })
