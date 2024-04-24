@@ -89,21 +89,10 @@ const items = [
   </section>
 
   <section class="h-fit flex flex-col justify-center">
-    <h2 class="text-secondary-500 text-5xl font-bold text-center">Vinification du Vin</h2>
-    <div class="container mx-auto grid grid-cols-2 h-4/5">
-<!--      <div class="flex flex-col items-center h-full gap-4">-->
-<!--        <img src="../public/img/Vinification_-_Vin_Rouge.webp" class="mt-10 w-96 object-cover max-w-max " alt="bg max">-->
-<!--        <div class="flex flex-col h-full gap-4 w-3/6">-->
-<!--          <img src="../public/img/Vinification_-_Vin_blanc.webp" class="mt-10 w-96 object-cover max-w-max" alt="bg max">-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="flex flex-col items-center h-full gap-4">-->
-<!--        <div class="flex flex-col h-full gap-4 w-3/6">-->
-<!--          <img src="../public/img/vin-champagne.jpg" class="mt-36 w-96 object-cover max-w-max" alt="bg max"> &lt;!&ndash; Augmentation de la marge pour déplacer l'image vers le bas &ndash;&gt;-->
-<!--        </div>-->
-<!--      </div>-->
-      <UCarousel v-slot="{ item }" :items="items">
-        <img :src="item" width="1200" height="800" draggable="false">
+    <h2 class="text-primary-500 text-5xl font-bold text-center mb-16 mt-16">Vinification du Vin</h2>
+    <div class="container mx-auto h-4/5 ">
+      <UCarousel v-slot="{ item }" :items="items" :ui="{ item: 'basis-full' }" arrows indicators   class="ml-24 mr-24 pl-24 pr-24">
+        <img :src="item" width="1000" height="500" draggable="false">
       </UCarousel>
     </div>
   </section>
