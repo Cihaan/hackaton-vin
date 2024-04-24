@@ -7,6 +7,7 @@ use App\Repository\SchoolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SchoolRepository::class)]
 #[ApiResource]
@@ -15,9 +16,11 @@ class School
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $name = null;
 
     /**
@@ -27,6 +30,7 @@ class School
     private Collection $workshops;
 
     #[ORM\Column(length: 10000, nullable: true)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $imagePath = null;
 
     public function __construct()
