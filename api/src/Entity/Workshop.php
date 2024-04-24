@@ -25,7 +25,7 @@ class Workshop
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read','workshop:write', 'reservation:read'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -39,14 +39,6 @@ class Workshop
     #[ORM\Column(length: 255)]
     #[Groups(['workshop:read','workshop:write'])]
     private ?string $password = null;
-
-
-    /**
-     * @var string[]
-     */
-    #[Assert\Json(message: "You've entered an invalid Json.")]
-    #[ORM\Column(type: Types::JSON)]
-    private array $drinkers = [];
 
     /**
      * @var Collection<int, Wine>
@@ -84,11 +76,21 @@ class Workshop
      */
     #[Assert\Json(message: "You've entered an invalid Json.")]
     #[ORM\Column(type: Types::JSON)]
+    #[Groups(['workshop:read','workshop:write'])]
     private array $theme = [];
+
+
+
+    /**
+     * @var Collection<int, Reservation>
+     */
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'workshop')]
+    private Collection $reservations;
 
     public function __construct()
     {
         $this->wines = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -120,18 +122,6 @@ class Workshop
         return $this;
     }
 
-    public function getLimitDrinker(): ?int
-    {
-        return $this->limitDrinker;
-    }
-
-    public function setLimitDrinker(?int $limitDrinker): static
-    {
-        $this->limitDrinker = $limitDrinker;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -140,18 +130,6 @@ class Workshop
     public function setPassword(string $password): static
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getDrinkers(): array
-    {
-        return $this->drinkers;
-    }
-
-    public function setDrinkers(array $drinkers): static
-    {
-        $this->drinkers = $drinkers;
 
         return $this;
     }
@@ -260,6 +238,39 @@ class Workshop
     public function setTheme(array $theme): static
     {
         $this->theme = $theme;
+
+        return $this;
+    }
+
+
+
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): static
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setWorkshop($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getWorkshop() === $this) {
+                $reservation->setWorkshop(null);
+            }
+        }
 
         return $this;
     }
