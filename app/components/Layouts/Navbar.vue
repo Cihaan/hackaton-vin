@@ -1,53 +1,66 @@
-
-
 <template>
-  <header>
-    <nav class="container flex items-center justify-between mx-auto px-6" aria-label="Global">
-      <div class="flex lg:flex-1">
-        <NuxtLink to="/">
-          <NuxtImg class="h-16 w-auto" src="img/logo.png" alt="Logo" />
-        </NuxtLink>
+  <div x-data="{ open: false }" class="bg-secondary shadow-md border-b-4 border-primary">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <NuxtLink to="/">
+        <NuxtImg class="h-16 w-auto" src="img/logo.png" alt="Logo" />
+      </NuxtLink>
+      <button @click="open = !open" class="lg:hidden text-primary">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-6 h-6 hover:text-black"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+      </button>
+      <div class="hidden lg:flex px-6">
+        <ul class="lg:flex space-x-4 ">
+          <li><LinkNav to="/">Accueil</LinkNav></li>
+          <li><LinkNav to="/workshop" active="underline" >Ateliers</LinkNav></li>
+          <li><LinkNav to="/administration" >Administration</LinkNav></li>
+        </ul>
       </div>
-
-      <div class="lg:hidden">
-        <img src="~/public/Hamburger_icon.png" alt="Menu" @click="toggleMenu" class="h-8 w-auto cursor-pointer">
-      </div>
-
-      <PopupMenu v-show="showMenu" @close="closeMenu" />
-
-      <div :class="{ 'hidden': true }" class="flex lg:flex gap-4">
-        <LinkNav to="/" class="w-full relative h-16 flex items-center justify-center p-2">
-          <div class="transform h-16 w-24 hover:bg-primary transition duration-500 flex justify-center items-center">
-            <p class="text-lg text-primary hover:text-white">Accueil</p>
-          </div>
-        </LinkNav>
-
-        <LinkNav to="/workshop" class="w-full relative h-16 flex items-center justify-center p-2">
-          <div class="transform h-16 w-24 hover:bg-primary transition duration-500  flex justify-center items-center">
-            <p class="text-lg text-primary hover:text-white">Ateliers</p>
-          </div>
-        </LinkNav>
-
-        <LinkNav to="/administration/list-workshop" class="w-full relative h-16 flex items-center justify-center p-2">
-          <div
-            class="transform h-16 p-2 hover:bg-primary transition duration-500 hover:text-white flex justify-center items-center">
-            <p class="text-lg text-primary hover:text-white">Administration</p>
-          </div>
-        </LinkNav>
-      </div>
-    </nav>
-  </header>
+    </div>
+    <div v-show="open" class="lg:hidden">
+      <ul class="bg-secondary text-end p-4">
+        <li><LinkNav to="/" >Accueil</LinkNav></li>
+        <li><LinkNav to="/ateliers" >Ateliers</LinkNav></li>
+        <li><LinkNav to="/administration">Administration</LinkNav></li>
+      </ul>
+    </div>
+  </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { ref } from 'vue';
+import LinkNav from "~/components/Atoms/LinkNav.vue";
 
-  import { ref } from 'vue';
-  import LinkNav from "~/components/Atoms/LinkNav.vue";
-  import PopupMenu from "~/components/Atoms/PopupMenu.vue";
+const open = ref(false);
 
-  const showMenu = ref(false);
 
-  const toggleMenu = () => {
-    showMenu.value = !showMenu.value;
-  };
 </script>
+
+<style scoped>
+.hover-underline::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  background-color: #000; /* Changez la couleur de l'underline au besoin */
+  transition: width 1000s ease; /* Durée de l'animation */
+}
+
+.hover-underline:hover::before {
+  width: 100%;
+  right: 0; /* Commencez l'underline de la droite */
+  left: auto; /* Réinitialisez la valeur de gauche */
+}
+</style>

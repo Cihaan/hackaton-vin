@@ -1,13 +1,17 @@
 <template>
-    <section class="h-fit flex flex-col justify-center bg-primary text-white pt-8 pb-24 px-12">
-      <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-24">
-        <div class="flex flex-col items-center lg:items-center gap-4">
-          <h2 class="text-secondary-500 text-5xl font-bold">Animateur</h2>
-          <div class="relative w-full lg:w-1/2">
-            <img src="~/public/MR.png" class="mt-10 w-full h-auto lg:h-88 object-cover max-w-full" alt="Animateur image">
-          </div>
+  <section class="h-fit flex flex-col justify-center bg-primary text-white pt-8 pb-24 px-12">
+    <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-24">
+      <!-- Image column (1/3) -->
+      <div class="col-span-1 lg:col-span-1 flex justify-center items-center">
+        <div class="relative w-full">
+          <img src="~/public/MR.png" class="w-full justify-center h-auto lg:h-88 object-cover max-w-full" alt="Animateur image">
         </div>
-        <div class="flex flex-col lg:items-start items-center lg:mt-20">
+      </div>
+      
+      <!-- Description column (2/3) -->
+      <div class="col-span-1 lg:col-span-2 flex flex-col justify-center">
+        <div class="flex flex-col items-center lg:items-start gap-4">
+          <h2 class="text-secondary-500 text-5xl font-bold">Animateur</h2>
           <p class="underline underline-offset-4 font-bold mb-4">BONNETON Olivier</p>
           <p class="text-lg leading-relaxed">
             Ma pratique : Faire (re)découvrir les Sciences sous de nouveaux angles (historiques, humains, ludiques, ...)
@@ -26,7 +30,6 @@
           </p>
         </div>
       </div>
-      
-    </section>
-  </template>
-  
+    </div>
+  </section>
+</template>
