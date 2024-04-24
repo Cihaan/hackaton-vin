@@ -90,10 +90,14 @@ const people = [{
 const isLoaded = ref(false);
 const workshopStore = useWorkshopStore();
 
-workshopStore.getWorkShop().then(() => {
+workshopStore.getWorkShops().then(() => {
   isLoaded.value = true;
 });
 
+definePageMeta({
+  requiresAuth: true,
+  middleware: 'guard-global'
+})
 
 </script>
 
