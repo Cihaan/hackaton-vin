@@ -6,9 +6,12 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use App\Controller\SecurityController;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -19,9 +22,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['reservation:read','reservation:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(['reservation:read','reservation:write'])]
     private ?string $email = null;
 
     /**
@@ -36,8 +41,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column]
-    private ?bool $isConfirmed = null;
+    /**
+     * @var Collection<int, Reservation>
+     */
+    #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'drinker')]
+    private Collection $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -114,14 +127,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function isConfirmed(): ?bool
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
     {
-        return $this->isConfirmed;
+        return $this->reservations;
     }
 
-    public function setConfirmed(bool $isConfirmed): static
+    public function addReservation(Reservation $reservation): static
     {
-        $this->isConfirmed = $isConfirmed;
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations->add($reservation);
+            $reservation->setDrinker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): static
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getDrinker() === $this) {
+                $reservation->setDrinker(null);
+            }
+        }
 
         return $this;
     }
