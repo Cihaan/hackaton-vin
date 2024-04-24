@@ -1,13 +1,6 @@
-export type WorkshopType = {
-    id: number;
-    school_id: number;
+export type SchoolType = {
+    id?: number;
     name: string;
-    date: string;
-    limitDrinker: number;
-    password: string;
-    theme: string;
-    description: string;
-    deadline: string;
-    drinkers: [];
-    price: number;
+    workshops?: Array<string>;
+    imagePath?: string;
 }

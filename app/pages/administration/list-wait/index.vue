@@ -10,12 +10,7 @@ definePageMeta({
 </script>
 
 <template>
-
-
   <NavAdministration />
-
-
-
 </template>
 
 <style scoped>

@@ -48,7 +48,7 @@ const open = ref(false);
           <LinkNav to="/">Accueil</LinkNav>
         </li>
         <li>
-          <LinkNav to="/workshop">Ateliers</LinkNav>
+          <LinkNav to="/ateliers">Ateliers</LinkNav>
         </li>
         <li>
           <LinkNav to="/administration/list-workshop">Administration</LinkNav>
