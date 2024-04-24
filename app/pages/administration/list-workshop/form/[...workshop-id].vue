@@ -82,8 +82,14 @@ function onSubmitSchool(){
   <form class="container mx-auto lg:px-0 px-10 mt-10 mb-10" @submit.prevent="onSubmitWorkshop" >
     <UCard >
       <template #header>
-        <h1 class="text-wine-600 text-3xl py-10 font-bold lg:text-start text-center">{{ title }}</h1>
 
+        <div class="flex justify-between items-center">
+          <h1 class="text-wine-600 text-3xl py-10 font-bold lg:text-start text-center">{{ title }}</h1>
+
+          <UButton icon="i-heroicons-arrow-long-left-16-solid" label="Retour à la liste" class="h-10" to="/administration/list-workshop" />
+
+        </div>
+        
         <UAlert class="mt-5" icon="i-heroicons-command-line" color="green" v-if="useWorkshopStore().message" :title="useWorkshopStore().message" />
 
       </template>

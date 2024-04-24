@@ -1,4 +1,5 @@
 import type {UserType} from '~/types/UserType';
+import type {WorkshopType} from "~/types/WorkshopType";
 
 export const useUserStore = defineStore('user', () => {
     const isError = ref(false);
@@ -6,6 +7,7 @@ export const useUserStore = defineStore('user', () => {
         email: '',
         role: ['ROLE_USER']
     });
+    const waitList = ref<UserType[]>([]);
     const router = useRouter()
 
     async function login(email: string, password: string) {
@@ -34,5 +36,20 @@ export const useUserStore = defineStore('user', () => {
         }
     })
 
-    return {user, isError, login};
+    async function getWaitList() {
+        const {
+            data,
+            pending,
+            error,
+            refresh
+        } = await useFetch<UserType[]>('http://127.0.0.1:8000/api/users', {
+            method : 'GET'
+        })
+        if (data.value) {
+            // @ts-ignore
+            waitList.value = data.value['hydra:member']
+        }
+    }
+
+    return {user, isError, waitList ,login,getWaitList};
 });
