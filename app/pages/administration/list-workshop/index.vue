@@ -3,7 +3,7 @@
 import NavAdministration from "~/components/Administrations/NavAdministration.vue";
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
-import DatePicker from "~/components/Atoms/DatePicker.vue";
+import TrueDatePicker from "~/components/Atoms/DatePicker.vue";
 
 const columns = [
 {
@@ -15,7 +15,7 @@ const columns = [
   label: 'Date'
 },
 {
-  key: 'school',
+  key: 'school_id',
   label: 'Lieu'
 },
 {
@@ -99,24 +99,24 @@ workshopStore.getWorkShop().then(() => {
 
 <template>
 
-  <Loader v-if="!isLoaded"/>
-  <transition name="fade" appear>
-    <div v-if="isLoaded">
       <NavAdministration />
 
 
+  <Loader v-if="!isLoaded"/>
+  <transition name="fade" appear>
+    <div v-if="isLoaded">
       <div class="container mx-auto lg:px-0 px-10">
 
         <div class="flex gap-2 px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
           <USelectMenu v-model="selectedColumns" :options="columns" multiple placeholder="Columns" />
 
-          <DatePicker />
+          <TrueDatePicker />
         </div>
 
         <UTable :columns="selectedColumns" :rows="useWorkshopStore().listWorkshop" >
 
           <template #actions-data="{ row }">
-            <NuxtLink to="form/1" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
+            <NuxtLink :to="`list-workshop/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
             <UButton icon="i-heroicons-trash-16-solid" />
           </template>
 
