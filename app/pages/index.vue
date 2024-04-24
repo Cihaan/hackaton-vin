@@ -1,5 +1,9 @@
 <script setup lang="ts">
-
+const items = [
+  'https://www.intervin.fr/sites/default/files/inline-images/vin-champagne.jpg',
+  'https://www.aveine.com/cdn/shop/files/Vinification_-_Vin_blanc.jpg?v=1674750948',
+  'https://www.aveine.com/cdn/shop/files/Vinification_-_Vin_Rouge.jpg?v=1675077183'
+]
 </script>
 
 <template>
@@ -79,6 +83,30 @@
       </div>
     </div>
   </section>
+
+  <section class="h-fit flex flex-col justify-center">
+    <h2 class="text-secondary-500 text-5xl font-bold text-center">Vinification du Vin</h2>
+    <div class="container mx-auto grid grid-cols-2 h-4/5">
+<!--      <div class="flex flex-col items-center h-full gap-4">-->
+<!--        <img src="../public/img/Vinification_-_Vin_Rouge.webp" class="mt-10 w-96 object-cover max-w-max " alt="bg max">-->
+<!--        <div class="flex flex-col h-full gap-4 w-3/6">-->
+<!--          <img src="../public/img/Vinification_-_Vin_blanc.webp" class="mt-10 w-96 object-cover max-w-max" alt="bg max">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="flex flex-col items-center h-full gap-4">-->
+<!--        <div class="flex flex-col h-full gap-4 w-3/6">-->
+<!--          <img src="../public/img/vin-champagne.jpg" class="mt-36 w-96 object-cover max-w-max" alt="bg max"> &lt;!&ndash; Augmentation de la marge pour déplacer l'image vers le bas &ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+      <UCarousel v-slot="{ item }" :items="items">
+        <img :src="item" width="1200" height="800" draggable="false">
+      </UCarousel>
+    </div>
+  </section>
+
+
+
+
 
 
 </template>
