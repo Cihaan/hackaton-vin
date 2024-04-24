@@ -8,7 +8,7 @@ const props = defineProps<{
 
 <template>
 
-  <nuxt-link class=" text-primary text-lg font-bold transform px-4 py-2 hover:underline rounded-lg" :to="to">
+  <nuxt-link class="text-primary text-lg font-bold transform px-4 py-2 hover:underline rounded-lg" :to="to">
     <slot />
   </nuxt-link>
 

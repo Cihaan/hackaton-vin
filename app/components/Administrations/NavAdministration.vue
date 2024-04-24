@@ -3,27 +3,27 @@ const links = [
   {
     label: 'Liste des ateliers',
     icon: 'i-heroicons-list-bullet-16-solid',
-    to: '/administration/list-workshop'
+    to: 'list-workshop'
   },{
     label: 'Calendrier',
     icon: 'i-heroicons-calendar-days',
-    to: '/getting-started/installation'
+    to: 'calendrier'
   }, {
     label: 'Liste d\'attentes',
     icon: 'i-heroicons-arrow-small-right',
-    to: '/components/command-palette'
+    to: 'list-wait'
   }
   , {
     label: 'Cave à vin',
     icon: 'i-heroicons-building-storefront-solid',
-    to: '/components/command-palette'
+    to: 'cave'
   }]
 
 </script>
 
 <template>
 
-  <section class="container mx-auto lg:px-0 px-10 mt-10 mb-10">
+  <section class="container mx-auto lg:px-0 px-10 mb-10">
     <h1 class="text-wine-600 text-5xl py-10 font-bold lg:text-start text-center">Administration</h1>
 
 

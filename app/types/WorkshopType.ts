@@ -1,13 +1,14 @@
 export type WorkshopType = {
-    id: number;
-    school_id: number;
-    name: string;
-    date: string;
+    id?: number;
+    school_id?: number;
+    name?: string | null;
+    date: Date;
     limitDrinker: number;
-    password: string;
-    theme: string;
+    password?: string;
+    theme: JSON;
     description: string;
-    deadline: string;
-    drinkers: [];
+    deadline: Date;
+    drinkers?: JSON;
     price: number;
+    location: string;
 }

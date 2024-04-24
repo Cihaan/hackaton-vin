@@ -30,8 +30,8 @@
     </div>
     <div v-show="open" class="lg:hidden">
       <ul class="bg-secondary text-end p-4">
-        <li><LinkNav to="/" >Accueil</LinkNav></li>
-        <li><LinkNav to="/workshop" >Ateliers</LinkNav></li>
+        <li><LinkNav to="/">Accueil</LinkNav></li>
+        <li><LinkNav to="/ateliers" >Ateliers</LinkNav></li>
         <li><LinkNav to="/administration/list-workshop">Administration</LinkNav></li>
       </ul>
     </div>
