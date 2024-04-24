@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+import LinkNav from "~/components/Atoms/LinkNav.vue";
 </script>
 
 <template>

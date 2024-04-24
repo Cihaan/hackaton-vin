@@ -15,6 +15,8 @@ import Animateur from "~/components/Sections/Animateur.vue";
     <Atelier />
     <Animateur />
   </div>
+  <LayoutsFooter class="mt-10"/>
+
 
 
   <LayoutsFooter />

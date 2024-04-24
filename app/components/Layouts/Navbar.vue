@@ -20,12 +20,16 @@
           </div>
         </LinkNav>
 
+        <LinkNav to="/workshop">
+          Ateliers
         <LinkNav to="/" class="w-full relative h-16 flex items-center justify-center p-2">
           <div class="transform h-16 w-24 hover:bg-primary transition duration-500  flex justify-center items-center">
             <p class="text-lg text-primary hover:text-white">Ateliers</p>
           </div>
         </LinkNav>
 
+        <LinkNav to="/administration/list-workshop">
+          Administration
         <LinkNav to="/" class="w-full relative h-16 flex items-center justify-center p-2">
           <div class="transform h-16 p-2 hover:bg-primary transition duration-500 hover:text-white flex justify-center items-center">
             <p class="text-lg text-primary hover:text-white">Administration</p>
