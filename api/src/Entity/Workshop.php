@@ -122,6 +122,18 @@ class Workshop
         return $this;
     }
 
+    public function getLimitDrinker(): ?int
+    {
+        return $this->limitDrinker;
+    }
+
+    public function setLimitDrinker(?int $limitDrinker): static
+    {
+        $this->limitDrinker = $limitDrinker;
+
+        return $this;
+    }
+
     public function getPassword(): ?string
     {
         return $this->password;
