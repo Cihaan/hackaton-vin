@@ -47,7 +47,7 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
                     'Accept': 'application/ld+json'
                 },
                 method: 'POST',
-                body: JSON.stringify(workshop)
+                body: workshop
             })
         }
         catch (e) {
