@@ -16,7 +16,7 @@ const props = defineProps<{
 
 <style scoped>
   .router-link-active {
-    @apply underline underline-offset-2;
+    @apply underline underline-offset-2 ;
   }
   .router-link-active:hover {
     @apply underline underline-offset-2;

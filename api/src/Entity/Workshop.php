@@ -148,8 +148,8 @@ class Workshop
 
     public function setDrinkers(?array $drinkers): static
     {
+        error_log("Attempting to set drinkers: " . print_r($drinkers, true));
         $this->drinkers = $drinkers;
-
         return $this;
     }
 

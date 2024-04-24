@@ -23,16 +23,16 @@
       <div class="hidden lg:flex px-6">
         <ul class="lg:flex space-x-4 ">
           <li><LinkNav to="/">Accueil</LinkNav></li>
-          <li><LinkNav to="/workshop" active="underline" >Ateliers</LinkNav></li>
-          <li><LinkNav to="/administration" >Administration</LinkNav></li>
+          <li><LinkNav to="/workshop" >Ateliers</LinkNav></li>
+          <li><LinkNav to="/administration/list-workshop" >Administration</LinkNav></li>
         </ul>
       </div>
     </div>
     <div v-show="open" class="lg:hidden">
       <ul class="bg-secondary text-end p-4">
         <li><LinkNav to="/" >Accueil</LinkNav></li>
-        <li><LinkNav to="/ateliers" >Ateliers</LinkNav></li>
-        <li><LinkNav to="/administration">Administration</LinkNav></li>
+        <li><LinkNav to="/workshop" >Ateliers</LinkNav></li>
+        <li><LinkNav to="/administration/list-workshop">Administration</LinkNav></li>
       </ul>
     </div>
   </div>
@@ -48,19 +48,5 @@ const open = ref(false);
 </script>
 
 <style scoped>
-.hover-underline::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -2px;
-  background-color: #000; /* Changez la couleur de l'underline au besoin */
-  transition: width 1000s ease; /* Durée de l'animation */
-}
 
-.hover-underline:hover::before {
-  width: 100%;
-  right: 0; /* Commencez l'underline de la droite */
-  left: auto; /* Réinitialisez la valeur de gauche */
-}
 </style>

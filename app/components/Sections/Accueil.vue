@@ -26,7 +26,7 @@
           <span
             class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Voir
             les Ateliers</span>
-          <span class="relative invisible">Voir les Ateliers</span>
+          <span class="relative invisible ">Voir les Ateliers</span>
         </a>
 
       </div>
