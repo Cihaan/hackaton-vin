@@ -16,11 +16,11 @@ class School
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write'])]
+//    #[Groups(['workshop:read','workshop:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+//    #[Groups(['workshop:read','workshop:write'])]
     private ?string $name = null;
 
     /**
@@ -29,9 +29,6 @@ class School
     #[ORM\OneToMany(targetEntity: Workshop::class, mappedBy: 'school')]
     private Collection $workshops;
 
-    #[ORM\Column(length: 10000, nullable: true)]
-    #[Groups(['workshop:read','workshop:write'])]
-    private ?string $imagePath = null;
 
     public function __construct()
     {
@@ -81,18 +78,6 @@ class School
                 $workshop->setSchool(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getImagePath(): ?string
-    {
-        return $this->imagePath;
-    }
-
-    public function setImagePath(?string $imagePath): static
-    {
-        $this->imagePath = $imagePath;
 
         return $this;
     }

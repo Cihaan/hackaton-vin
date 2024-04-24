@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: WorkshopRepository::class)]
 #[ApiResource(
@@ -40,9 +41,12 @@ class Workshop
     private ?string $password = null;
 
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    #[Groups(['workshop:read','workshop:write'])]
-    private ?array $drinkers = null;
+    /**
+     * @var string[]
+     */
+    #[Assert\Json(message: "You've entered an invalid Json.")]
+    #[ORM\Column(type: Types::JSON)]
+    private array $drinkers = [];
 
     /**
      * @var Collection<int, Wine>
@@ -75,12 +79,11 @@ class Workshop
     #[Groups(['workshop:read','workshop:write'])]
     private ?int $price = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    #[Groups(['workshop:read','workshop:write'])]
-    private array $image = [];
-
-    #[ORM\Column(type: Types::ARRAY)]
-    #[Groups(['workshop:read','workshop:write'])]
+    /**
+     * @var string[]
+     */
+    #[Assert\Json(message: "You've entered an invalid Json.")]
+    #[ORM\Column(type: Types::JSON)]
     private array $theme = [];
 
     public function __construct()
@@ -141,12 +144,12 @@ class Workshop
         return $this;
     }
 
-    public function getDrinkers(): ?array
+    public function getDrinkers(): array
     {
         return $this->drinkers;
     }
 
-    public function setDrinkers(?array $drinkers): static
+    public function setDrinkers(array $drinkers): static
     {
         error_log("Attempting to set drinkers: " . print_r($drinkers, true));
         $this->drinkers = $drinkers;
@@ -245,18 +248,6 @@ class Workshop
     public function setPrice(int $price): static
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getImage(): array
-    {
-        return $this->image;
-    }
-
-    public function setImage(array $image): static
-    {
-        $this->image = $image;
 
         return $this;
     }

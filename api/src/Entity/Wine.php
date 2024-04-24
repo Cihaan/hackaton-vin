@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: WineRepository::class)]
 #[ApiResource]
@@ -16,19 +17,24 @@ class Wine
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?int $year = null;
 
 
     #[ORM\Column]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $type = null;
 
     /**
@@ -38,27 +44,35 @@ class Wine
     private Collection $workshops;
 
     #[ORM\ManyToOne(inversedBy: 'wines')]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?Domain $domain = null;
 
-    #[ORM\Column(length: 10000)]
+    #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $picture = null;
 
     #[ORM\Column]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?int $serviceTemperature = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $serviceKind = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $conservation = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?\DateTimeInterface $limiteDate = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read','workshop:write'])]
     private ?string $comment = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::JSON)]
+    #[Groups(['workshop:read','workshop:write'])]
     private array $grapeVariety = [];
 
     public function __construct()
