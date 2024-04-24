@@ -8,9 +8,11 @@ use App\Repository\ReservationRepository;
 use App\Repository\UserRepository;
 use App\Repository\WorkshopRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
@@ -65,9 +67,15 @@ class WorkshopController extends AbstractController
             ->subject('Inscription ateliers')
             ->text('Inscription ateliers')
             ->html('Inscription ateliers -> mdp: ' . $workshop->getPassword());
+//        dd($email);
+        try {
+            $mailer->send($email);
+        }catch (TransportExceptionInterface $e) {
+            dd($e);
+        }
+//        return new Response('Inscription réussie', Response::HTTP_OK);
+        return $this->render('base.html.twig');
 
-        $mailer->send($email);
-        return new Response('Inscription réussie', Response::HTTP_OK);
     }
 
 

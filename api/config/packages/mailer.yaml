@@ -1,3 +1,3 @@
 framework:
     mailer:
-        dsn: 'smtp://0.0.0.0:1025'
+        dsn: 'smtp://0.0.0.0:32771'
