@@ -27,7 +27,9 @@ const links = [
     <h1 class="text-wine-600 text-5xl py-10 font-bold lg:text-start text-center">Administration</h1>
 
 
-    <UHorizontalNavigation class="bg-[#D9D9D9] mt-8 p-4 rounded-xl"  :ui="{ inactive: 'text-wine-500' , base : 'lg:text-sm text-[10px]' ,  icon: {base: 'lg:w-5 w-3 lg:h-5 h-3',},  }" :links="links" />
+    <UHorizontalNavigation class="bg-[#D9D9D9] mt-8 p-4 rounded-xl"  :ui="{ inactive: 'text-wine-500' , base : 'lg:text-sm text-[10px]' ,  icon: {base: 'lg:w-5 w-3 lg:h-5 h-3',},  }" :links="links" >
+
+    </UHorizontalNavigation>
 
   </section>
 
