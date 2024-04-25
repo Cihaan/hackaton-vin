@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import DatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {useSchoolStore} from "~/store/SchoolStore";
 import type {SchoolType} from "~/types/SchoolType";
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import type {WorkshopType} from "~/types/WorkshopType";
+import DatePicker from "~/components/Atoms/UseDatePicker.vue";
 
 const name = ref('')
 const school = ref()
@@ -23,6 +23,28 @@ const id = route.params.workshopid
 
 const title = id ? 'Modification Atelier' : 'Création Atelier'
 
+if(id){
+  useWorkshopStore().getWorkShop(id)
+
+  onMounted(async () => {
+    await useWorkshopStore().workshopDetail
+    const workshopDetail = useWorkshopStore().workshopDetail
+    if(workshopDetail)
+    {
+      name.value = workshopDetail.name ?? ''
+      school.value = workshopDetail.school_id
+      date.value = new Date(workshopDetail.date)
+      deadline.value = new Date(workshopDetail.deadline)
+      description.value = workshopDetail.description
+      price.value = workshopDetail.price
+      location.value = workshopDetail.location
+      limitDrinker.value = workshopDetail.limitDrinker
+    }
+
+  })
+}
+
+
 // Récuperation Etablissement ( ecole )
 useSchoolStore().getSchool()
 
@@ -36,12 +58,12 @@ function onSubmitWorkshop(){
     name: name.value,
     school_id: school.value,
     date: date.value,
-    theme: {
-      "0": "smehlee"
-    },
-    drinkers: {
-      "0": "smehlee"
-    },
+    // theme: {
+    //   "0": "smehlee"
+    // },
+    // drinkers: {
+    //   "0": "smehlee"
+    // },
     description: description.value,
     price: price.value,
     location: location.value,
@@ -49,7 +71,13 @@ function onSubmitWorkshop(){
     deadline: deadline.value,
   }
 
-  useWorkshopStore().addWorkShop(workshop)
+  if(id){
+    useWorkshopStore().updateWorkShop(parseInt(id[0]), workshop)
+  }
+  else {
+    useWorkshopStore().addWorkShop(workshop)
+  }
+
 
   // setTimeout(() => {
   //   useWorkshopStore().setMessage('')
@@ -77,8 +105,6 @@ function onSubmitSchool(){
 <template>
 
 
-
-
   <form class="container mx-auto lg:px-0 px-10 mt-10 mb-10" @submit.prevent="onSubmitWorkshop" >
     <UCard >
       <template #header>
@@ -89,8 +115,6 @@ function onSubmitSchool(){
           <UButton icon="i-heroicons-arrow-long-left-16-solid" label="Retour à la liste" class="h-10" to="/administration/list-workshop" />
 
         </div>
-        
-        <UAlert class="mt-5" icon="i-heroicons-command-line" color="green" v-if="useWorkshopStore().message" :title="useWorkshopStore().message" />
 
       </template>
 
@@ -115,7 +139,7 @@ function onSubmitSchool(){
         </UFormGroup>
 
         <UFormGroup label="Thèmes" name="theme" >
-          <UInput v-model="theme" required />
+          <UInput v-model="theme" />
         </UFormGroup>
 
         <UFormGroup label="Deadline" name="deadline" >
@@ -136,9 +160,12 @@ function onSubmitSchool(){
       </div>
 
       <template #footer>
-        <UButton :loading="useWorkshopStore().loading" type="submit">
+        <UButton v-if="!useWorkshopStore().message" :loading="useWorkshopStore().loading" type="submit">
           Enregistrer
         </UButton>
+
+        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />
+
       </template>
 
     </UCard>
@@ -166,7 +193,7 @@ function onSubmitSchool(){
         </div>
 
         <template #footer>
-          <UButton :loading="useSchoolStore().loading" type="submit">
+          <UButton  :loading="useSchoolStore().loading" type="submit">
             Enregistrer
           </UButton>
         </template>

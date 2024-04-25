@@ -5,7 +5,7 @@ export type WorkshopType = {
     date: Date;
     limitDrinker: number;
     password?: string;
-    theme: JSON;
+    theme?: JSON;
     description: string;
     deadline: Date;
     drinkers?: JSON;

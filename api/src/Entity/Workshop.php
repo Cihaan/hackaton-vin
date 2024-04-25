@@ -77,7 +77,7 @@ class Workshop
     #[Assert\Json(message: "You've entered an invalid Json.")]
     #[ORM\Column(type: Types::JSON)]
     #[Groups(['workshop:read','workshop:write'])]
-    private array $theme = [];
+    private ?array $theme = null;
 
 
 
