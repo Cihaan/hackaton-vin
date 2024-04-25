@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {WorkshopType} from "~/types/WorkshopType";
+import LinkNav from "~/components/Atoms/LinkNav.vue";
 import {ref} from 'vue';
 import {useWorkshopStore} from '~/store/WorkshopStore';
 import Loader from '~/components/Atoms/Loader.vue';
@@ -27,32 +28,47 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
       <div v-if="isLoaded" class="min-h-screen ">
         <!--        je rajoute une baniere-->
         <img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt=""
-             class=" shadow-md rounded-md bg-slate-50 w-full h-64 my-6 object-cover "
+             class="shadow-md rounded-md bg-slate-50 w-full h-64 my-6 object-cover "
         >
         <div class="flex flex-row justify-between items-center mb-4">
-          <UButton
+          <!-- <UButton
               @click="workshopStore.reservationModalOpen = true"
-          >Réserver</UButton>
-          <p class="text-lg font-medium text-end font-sans">Participation : {{ workshop.price }}€ par personnes</p>
-        </div>
-        <h1 class="mb-1 text-3xl  text-wine-600 font-sans font-medium">
-          {{ workshop.name }}
-        </h1>
+          >Réserver</UButton> -->
+          <p class="text-lg text-gray-500 font-medium text-end font-sans">Participation : {{ workshop.price }}€ par personnes</p>
 
-        <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
-        <p class="break-all font-sans pt-6">{{ workshop.description }}</p>
-        <h3 class="text-wine-600 text-2xl font-bold pt-6">
-          Le thème qui vous est proposé :
-        </h3>
-        <ul class="list-disc list-inside">
-          <li>{{ workshop.theme }}</li>
-        </ul>
+          <button @click="workshopStore.reservationModalOpen = true"
+            class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
+            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
+            <img src="~/public/calendrier.png" alt="Icon" class="w-6 h-6">
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Réserver</span>
+            <span class="relative invisible">Réserver</span>
+          </button>
+
+
+
+          
+        </div>
+        <div class="px-10 py-5 shadow-md border-2 rounded-md bg-white">
+          <h1 class="mb-1 text-3xl  text-wine-600 font-medium">
+            {{ workshop.name }}
+          </h1>
+
+          <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
+          <p class="break-all pt-6">{{ workshop.description }}</p>
+          <h3 class="text-wine-600 text-2xl pt-6 pb-4">
+            Le thème qui vous est proposé :
+          </h3>
+          <ul class="list-disc list-inside">
+            <li>{{ workshop.theme }}</li>
+          </ul>
       </div>
+    </div>
     </transition>
   </div>
 
   <UModal v-model="workshopStore.reservationModalOpen">
-    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
+    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800'}">
       <template #header>
         <h2 class="text-lg font-semibold">Réserver un atelier</h2>
 
@@ -66,12 +82,29 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
         />
       </template>
 
-      <UInput v-model="workshopStore.reservationEmail" label="email" />
+      <UInput v-model="workshopStore.reservationEmail" label="email" placeholder="Saisissez votre email"/>
 
       <template #footer>
-        <UButton
+        <!-- <UButton
             @click="workshopStore.reserveWorkShop(id[0])"
-        >Valider</UButton>
+        >Valider</UButton> -->
+        
+        <button @click="workshopStore.reserveWorkShop(id[0])"
+            class="relative inline-flex items-center justify-center p-1 px-2 py-1 overflow-hidden font-small bg-white text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
+            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
+            <img src="~/public/valider.png" alt="Icon" class="w-6 h-6">
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-black-500 font-medium transition-all duration-300 transform group-hover:translate-x-full ease">Valider</span>
+            <span class="relative invisible">Valider</span>
+        </button>
+        <button @click="workshopStore.reservationModalOpen = false"
+            class="relative inline-flex items-center justify-center ml-4 p-1 px-2 py-1 overflow-hidden font-small bg-primary text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
+            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease border-secondary-500">
+            <img src="~/public/annuler.png" alt="Icon" class="w-6 h-6">
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-white font-medium transition-all duration-300 transform group-hover:translate-x-full ease">Annuler</span>
+            <span class="relative invisible">Annuler</span>
+        </button>
       </template>
     </UCard>
   </UModal>
