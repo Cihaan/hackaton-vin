@@ -107,14 +107,26 @@ function onSubmitSchool() {
 function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
   const selectedFile = event.target.files[0];
   if (selectedFile) {
-    banner.value = URL.createObjectURL(selectedFile)
+    //to base64
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = () => {
+      banner.value = reader.result as string
+    }
+
   }
 }
 
 function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
   const selectedFile = event.target.files[0];
   if (selectedFile) {
-    mainImage.value = URL.createObjectURL(selectedFile)
+    //to base64
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = () => {
+      mainImage.value = reader.result as string
+
+    }
   }
 }
 

@@ -27,7 +27,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
     <transition name="fade" appear>
       <div v-if="isLoaded" class="min-h-screen ">
         <!--        je rajoute une baniere-->
-        <img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt=""
+        <img :src="workshop.banner" alt=""
              class="shadow-md rounded-md bg-slate-50 w-full h-64 my-6 object-cover "
         >
         <div class="flex flex-row justify-between items-center mb-4">
@@ -62,6 +62,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
           <ul class="list-disc list-inside">
             <li>{{ workshop.theme }}</li>
           </ul>
+          <img :src="workshop.mainImage" alt="" class="w-full h-64 my-6 object-cover"/>
       </div>
     </div>
     </transition>
