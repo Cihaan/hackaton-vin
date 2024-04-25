@@ -8,7 +8,7 @@
             </LinkNav>
           </li>
           <li>
-            <LinkNav to="/ateliers" @click="closeMenu">
+            <LinkNav to="/workshop" @click="closeMenu">
               Ateliers
             </LinkNav>
           </li>

@@ -1,5 +1,5 @@
 <template>
-  <div x-data="{ open: false }" class="bg-secondary shadow-md border-b-4 border-primary">
+  <div x-data="{ open: false }" class="bg-secondary shadow-md border-b-4 border-primary noprint">
     <div class="container mx-auto flex justify-between items-center px-4">
       <NuxtLink to="/">
         <NuxtImg class="h-16 w-auto" src="img/logo.png" alt="Logo" />
@@ -31,7 +31,7 @@
     <div v-show="open" class="lg:hidden">
       <ul class="bg-secondary text-end p-4">
         <li><LinkNav to="/" >Accueil</LinkNav></li>
-        <li><LinkNav to="/ateliers" >Ateliers</LinkNav></li>
+        <li><LinkNav to="/workshop" >Ateliers</LinkNav></li>
         <li><LinkNav to="/administration">Administration</LinkNav></li>
       </ul>
     </div>
