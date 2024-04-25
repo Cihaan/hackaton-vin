@@ -11,9 +11,14 @@ const columns = [
   label: 'Atelier'
 },
 {
+  key : 'banner',
+  label: 'Bannière'
+},
+{
   key : 'mainImage',
   label: 'Photo principale'
 },
+
 {
   key: 'date',
   label: 'Date'
@@ -97,6 +102,10 @@ definePageMeta({
 
           <template #mainImage-data="{ row }">
             <img :src="row.mainImage" alt="" class="w-20" />
+          </template>
+
+          <template #banner-data="{ row }">
+            <img :src="row.banner" alt="" class="w-20" />
           </template>
 
 

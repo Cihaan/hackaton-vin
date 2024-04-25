@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {useWorkshopStore} from "~/store/WorkshopStore";
-import DatePicker from "~/components/Atoms/UseDatePicker.vue";
+import DatePicker from "~/components/Atoms/DatePicker.vue";
 import {useWineStore} from "~/store/WineStore";
 import {useDomainStore} from "~/store/DomainStore";
 import type {WineType} from "~/types/WineType";
