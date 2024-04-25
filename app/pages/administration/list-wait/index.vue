@@ -1,20 +1,32 @@
 <script setup lang="ts">
 
 import NavAdministration from "~/components/Administrations/NavAdministration.vue";
-import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
-import TrueDatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {format} from "date-fns";
-import { useUserStore } from "~/store/UserStore";
+import {useUserStore} from "~/store/UserStore";
+import type {UserType} from "~/types/UserType";
+import {useWorkshopStore} from "~/store/WorkshopStore";
 
 const columns = [
   {
-    key: 'name',
-    label: 'Atelier'
+    key: 'drinker.email',
+    label: 'Email'
+  },
+  {
+    'key': 'workshop.name',
+    'label': 'Atelier'
+  },
+  {
+    'key': 'workshop.date',
+    'label': 'Date'
+  },
+  {
+    'key': 'workshop.deadline',
+    'label': 'Date limite'
   },
   {
     key: 'actions',
-    label: 'Actions'
+    label: 'Paiement Validé'
   }
 ]
 
@@ -32,6 +44,17 @@ definePageMeta({
   middleware: 'guard-global'
 })
 
+function updateReservation(row : any) {
+  const body : UserType = {
+    isConfirmed: row.isConfirmed
+  }
+  useUserStore().updateReservation(row.id,body);
+
+  setTimeout(() => {
+    useUserStore().setMessage('')
+  }, 1500)
+
+}
 </script>
 
 <template>
@@ -45,26 +68,28 @@ definePageMeta({
         <div class="flex gap-2 px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
 
           <USelectMenu v-model="selectedColumns" :options="columns" multiple placeholder="Columns" />
-
-          <UButton icon="i-heroicons-document-plus-20-solid" label="Ajouter un atelier" class="ml-auto" to="/administration/list-workshop/form" />
-
         </div>
 
-        <UTable :columns="selectedColumns" :rows="useWorkshopStore().listWorkshop" >
+        <UAlert class="mb-5" v-if="useUserStore().message" icon="i-heroicons-command-line" color="green"  :title="useUserStore().message" />
 
-          <template #date-data="{ row }">
-            <p>{{ row.date ? format(new Date(row.date), 'dd/MM/yyyy') : '' }}</p>
+        <UTable :columns="selectedColumns" :rows="useUserStore().waitList" >
+
+          <template #workshop.date-data="{ row }">
+            <p>{{ row.workshop.date ? format(new Date(row.workshop.date), 'dd/MM/yyyy') : '' }}</p>
           </template>
 
-          <template #deadline-data="{ row }">
-            <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
+          <template #workshop.deadline-data="{ row }">
+            <p>{{ row.workshop.deadline ? format(new Date(row.workshop.deadline), 'dd/MM/yyyy') : '' }}</p>
           </template>
 
           <template #actions-data="{ row }">
             <UToggle
+                :loading="useUserStore().loading"
                 on-icon="i-heroicons-check-20-solid"
                 off-icon="i-heroicons-x-mark-20-solid"
-                :model-value="row.is_confirmed"
+                :model-value="row.isConfirmed"
+                @update:model-value="row.isConfirmed = $event"
+                @change="updateReservation(row)"
             />
           </template>
 

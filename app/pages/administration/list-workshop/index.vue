@@ -15,7 +15,7 @@ const columns = [
   label: 'Date'
 },
 {
-  key: 'school_id',
+  key: 'school.name',
   label: 'Etablissement'
 },
 {
@@ -36,7 +36,7 @@ const columns = [
 }
 , {
   key: 'deadline',
-  label: 'Deadline'
+  label: 'Date limite'
 }
 , {
   key: 'price',

@@ -9,15 +9,24 @@ export const useUserStore = defineStore('user', () => {
     });
     const waitList = ref<UserType[]>([]);
     const router = useRouter()
+    const loading = ref(false);
+    const message = ref('');
+
+    const userStorage = localStorage.getItem('user');
+    if (userStorage) {
+        user.value = JSON.parse(userStorage);
+    }
 
     async function login(email: string, password: string) {
         try {
-            const response  = await $fetch<UserType>('http://localhost:8000/api/login', {
+            const response  = await $fetch<any>('http://localhost:8000/api/login', {
                 method: 'POST',
                 body: JSON.stringify({username: email, password})
             });
 
-            user.value.email = response.email;
+            console.log(response);
+
+            user.value.email = response.username;
             user.value.role = response.role;
 
             localStorage.setItem('user', JSON.stringify(user.value));
@@ -29,12 +38,6 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    onMounted(() => {
-        const userStorage = localStorage.getItem('user');
-        if (userStorage) {
-            user.value = JSON.parse(userStorage);
-        }
-    })
 
     async function getWaitList() {
         const {
@@ -51,5 +54,28 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    return {user, isError, waitList ,login,getWaitList};
+    async function updateReservation(reservationId: number, reservation: UserType){
+        try {
+            loading.value = true;
+            await $fetch('http://127.0.0.1:8000/api/reservations/' + reservationId, {
+                headers: {
+                    'Content-Type': 'application/merge-patch+json', // Corrected Content-Type
+                    'Accept': 'application/ld+json'
+                },
+                method: 'PATCH',
+                body: reservation
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setMessage('La réservation a été mise à jour avec succès');
+            loading.value = false;
+        }
+    }
+
+    function setMessage(msg: string) {
+        message.value = msg;
+    }
+
+    return {user, isError, waitList,loading,message ,login,getWaitList, updateReservation,setMessage};
 });
