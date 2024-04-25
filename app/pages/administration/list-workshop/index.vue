@@ -3,7 +3,6 @@
 import NavAdministration from "~/components/Administrations/NavAdministration.vue";
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
-import TrueDatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {format} from "date-fns";
 
 const columns = [
