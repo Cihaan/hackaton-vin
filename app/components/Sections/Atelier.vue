@@ -1,3 +1,9 @@
+<script setup>
+import LinkNav from "~/components/Atoms/LinkNav.vue";
+
+
+</script>
+
 <template>
     <section class="flex flex-col justify-center p-10">
       <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 h-4/5 lg:h-auto">
