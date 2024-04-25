@@ -49,7 +49,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
 
           
         </div>
-        <div class="px-10 py-5 shadow-md border-2 rounded-md bg-white">
+        <div class="px-10 py-5 shadow-md border-2 rounded-md bg-white mb-8">
           <h1 class="mb-1 text-3xl  text-wine-600 font-medium">
             {{ workshop.name }}
           </h1>
