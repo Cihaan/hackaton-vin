@@ -17,7 +17,7 @@ workshopStore.getWorkShops().then(() => {
     <Loader v-if="!isLoaded"/>
     <transition name="fade" appear>
       <div v-if="isLoaded" class="min-h-screen ">
-        <h2 class="text-wine-600 text-5xl py-10 font-bold">LES ATELIERS DISPONIBLES</h2>
+        <h2 class="text-wine-600 text-5xl py-10 font-bold">Les Ateliers disponibles</h2>
         <div v-if="workshopStore.listWorkshop.length === 0" class="text-gray-600">
           Aucun atelier disponible pour le moment.
         </div>

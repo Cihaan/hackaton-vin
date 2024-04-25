@@ -70,6 +70,7 @@ class WorkshopController extends AbstractController
             ->text('Inscription ateliers')
             ->html('Inscription ateliers -> mdp: ' . $workshop->getPassword());
 //        dd($email);
+//        dd($email->getBody());
         try {
             $mailer->send($email);
         }catch (TransportExceptionInterface $e) {
