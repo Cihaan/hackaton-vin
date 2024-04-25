@@ -50,7 +50,7 @@ class Wine
     #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
     private ?Domain $domain = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
     private ?string $picture = null;
 
