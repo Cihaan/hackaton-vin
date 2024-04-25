@@ -17,10 +17,9 @@ export default {
   data() {
     return {
       calendarOptions: {
-        timeZone: 'UTC',
         plugins: [interactionPlugin, timeGridPlugin],
+        displayEventTime: true,
         initialView: 'timeGridWeek',
-        nowIndicator: true,
         editable: false,
         initialEvents: this.workshopEvents,
       }

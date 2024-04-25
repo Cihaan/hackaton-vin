@@ -30,7 +30,7 @@ class Workshop
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['workshop:read', 'workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write','reservation:read'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(nullable: true)]
@@ -53,7 +53,7 @@ class Workshop
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['workshop:read', 'workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write','reservation:read'])]
     private ?\DateTimeInterface $deadline = null;
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
@@ -61,7 +61,6 @@ class Workshop
     private ?School $school = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    #[Assert\Type(Boolean::class)]
     #[Groups(['workshop:read','workshop:write'])]
     public ?bool $isCanceled = null;
 
@@ -80,11 +79,21 @@ class Workshop
      * @var Collection<int, Reservation>
      */
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'workshop')]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private Collection $reservations;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups(['workshop:read', 'workshop:write'])]
     private ?\DateTimeInterface $endDate = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['workshop:read', 'workshop:write'])]
+    private ?string $banner = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['workshop:read', 'workshop:write'])]
+    private ?string $mainImage = null;
+
 
     public function __construct()
     {
@@ -292,6 +301,30 @@ class Workshop
     public function setEndDate(\DateTimeInterface $endDate): static
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getBanner(): ?string
+    {
+        return $this->banner;
+    }
+
+    public function setBanner(?string $banner): static
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    public function getMainImage(): ?string
+    {
+        return $this->mainImage;
+    }
+
+    public function setMainImage(?string $mainImage): static
+    {
+        $this->mainImage = $mainImage;
 
         return $this;
     }

@@ -25,7 +25,6 @@ class Reservation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    #[Assert\Type(Boolean::class)]
     #[Groups(['reservation:read','reservation:write'])]
     public ?bool $isConfirmed = null;
 

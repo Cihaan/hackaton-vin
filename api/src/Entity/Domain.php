@@ -16,15 +16,15 @@ class Domain
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read','workshop:write',  'wine:read','wine:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read','workshop:write', 'wine:read','wine:write'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read','workshop:write', 'wine:read','wine:write'])]
     private ?string $location = null;
 
     /**

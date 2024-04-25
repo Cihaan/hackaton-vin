@@ -1,8 +1,9 @@
 export type WorkshopType = {
     id?: number;
-    school_id?: number | null;
+    school?: string | null;
     name?: string | null;
     date: Date;
+    end_date: Date;
     limitDrinker: number;
     password: string;
     theme?: string | null;
@@ -11,4 +12,6 @@ export type WorkshopType = {
     price: number;
     location: string;
     isCanceled: boolean;
+    banner: string;
+    mainImage: string;
 }

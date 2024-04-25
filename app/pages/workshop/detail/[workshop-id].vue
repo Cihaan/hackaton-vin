@@ -27,10 +27,10 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
     <transition name="fade" appear>
       <div v-if="isLoaded" class="min-h-screen ">
         <!--        je rajoute une baniere-->
-        <img src="https://tailwindcss.com/_next/static/media/headlessui@75.c1d50bc1.jpg" alt=""
+        <img :src="workshop.banner" alt=""
              class="shadow-md rounded-md bg-slate-50 w-full h-64 my-6 object-cover "
         >
-        <div class="flex flex-row justify-between items-center mb-4">
+        <div class="flex flex-row justify-between items-center mb-10">
           <!-- <UButton
               @click="workshopStore.reservationModalOpen = true"
           >Réserver</UButton> -->
@@ -46,22 +46,38 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
           </button>
 
 
-
-          
         </div>
-        <div class="px-10 py-5 shadow-md border-2 rounded-md bg-white mb-8">
+        <div class="px-10 py-5 shadow-md border-2 rounded-md bg-white mb-10">
           <h1 class="mb-1 text-3xl  text-wine-600 font-medium">
             {{ workshop.name }}
           </h1>
 
           <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
           <p class="break-all pt-6">{{ workshop.description }}</p>
-          <h3 class="text-wine-600 text-2xl pt-6 pb-4">
-            Le thème qui vous est proposé :
-          </h3>
-          <ul class="list-disc list-inside">
-            <li>{{ workshop.theme }}</li>
-          </ul>
+
+          <div class="flex justify-between">
+            <div>
+              <h3 class="text-wine-600 text-2xl pt-6 pb-4">
+                Le thème qui vous est proposé :
+              </h3>
+              <ul class="list-disc list-inside">
+                <li>{{ workshop.theme }}</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="text-wine-600 text-2xl pt-6 pb-4">
+                Les bouteilles de vin :
+              </h3>
+              <ul class="list-disc list-inside">
+                <li>{{ workshop.theme }}</li>
+              </ul>
+            </div>
+          </div>
+
+
+
+          <img :src="workshop.mainImage" alt="" class="w-full h-64 my-6 object-cover"/>
       </div>
     </div>
     </transition>

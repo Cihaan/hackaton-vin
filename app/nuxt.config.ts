@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/administration/calendrier': { ssr: false },
   },
-  // ssr: false,
+   ssr: false,
   colorMode: {
     fallback: 'light',
     preference: 'light'

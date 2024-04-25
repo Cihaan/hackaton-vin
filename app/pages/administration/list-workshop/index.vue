@@ -11,11 +11,20 @@ const columns = [
   label: 'Atelier'
 },
 {
+  key : 'banner',
+  label: 'Bannière'
+},
+{
+  key : 'mainImage',
+  label: 'Photo principale'
+},
+
+{
   key: 'date',
   label: 'Date'
 },
 {
-  key: 'school_id',
+  key: 'school.name',
   label: 'Etablissement'
 },
 {
@@ -36,7 +45,7 @@ const columns = [
 }
 , {
   key: 'deadline',
-  label: 'Deadline'
+  label: 'Date limite'
 }
 , {
   key: 'price',
@@ -89,6 +98,16 @@ definePageMeta({
           <template #deadline-data="{ row }">
             <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
           </template>
+
+
+          <template #mainImage-data="{ row }">
+            <img :src="row.mainImage" alt="" class="w-20" />
+          </template>
+
+          <template #banner-data="{ row }">
+            <img :src="row.banner" alt="" class="w-20" />
+          </template>
+
 
           <template #actions-data="{ row }">
             <NuxtLink :to="`list-workshop/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>

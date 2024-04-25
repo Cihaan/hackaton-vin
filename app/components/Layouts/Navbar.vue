@@ -1,9 +1,19 @@
 <script setup>
 import {ref} from 'vue';
 import LinkNav from "~/components/Atoms/LinkNav.vue";
+import {useUserStore} from "~/store/UserStore.ts";
 
+const userStore = useUserStore();
 const open = ref(false);
+const router = useRouter();
 
+
+
+function clearLocalStorage() {
+  localStorage.removeItem('user');
+  userStore.user.email = '';
+  router.push('/login')
+}
 
 </script>
 <template>
@@ -37,7 +47,11 @@ const open = ref(false);
             <LinkNav to="/workshop">Ateliers</LinkNav>
           </li>
           <li>
-            <LinkNav to="/administration/list-workshop">Administration</LinkNav>
+            <LinkNav to="/administration/list-workshop"><UIcon class="text-2xl align-middle" name="i-heroicons-user-circle-16-solid" /></LinkNav>
+          </li>
+          <li v-if="userStore.user.email">
+            <UButton @click="clearLocalStorage">Log out
+            </UButton>
           </li>
         </ul>
       </div>
@@ -51,7 +65,11 @@ const open = ref(false);
           <LinkNav to="/workshop">Ateliers</LinkNav>
         </li>
         <li>
-          <LinkNav to="/administration/list-workshop">Administration</LinkNav>
+          <LinkNav to="/administration/list-workshop"><UIcon class="text-2xl align-middle" name="i-heroicons-user-circle-16-solid" /></LinkNav>
+        </li>
+        <li v-if="userStore.user.email">
+          <UButton @click="clearLocalStorage">Log out
+          </UButton>
         </li>
       </ul>
     </div>
