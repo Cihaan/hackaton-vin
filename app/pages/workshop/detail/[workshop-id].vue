@@ -12,6 +12,7 @@ const email = ref("")
 const isLoaded = ref(false);
 const workshopStore = useWorkshopStore();
 let workshop = ref<WorkshopType | null>(null);
+let id = route.params.workshopid;
 workshopStore.getWorkShop(route.params.workshopid).then(() => {
   isLoaded.value = true;
   workshop = workshopStore.workshopDetail
@@ -71,7 +72,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
 
       <template #footer>
         <UButton
-            @click="workshopStore.reserveWorkShop(route.params.workshopid.toString())"
+            @click="workshopStore.reserveWorkShop(id[0])"
         >Valider</UButton>
       </template>
     </UCard>

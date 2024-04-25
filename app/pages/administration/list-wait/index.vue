@@ -5,6 +5,7 @@ import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
 import TrueDatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {format} from "date-fns";
+import { useUserStore } from "~/store/UserStore";
 
 const columns = [
   {
@@ -20,9 +21,9 @@ const columns = [
 const selectedColumns = ref([...columns])
 
 const isLoaded = ref(false);
-const workshopStore = useWorkshopStore();
+const userStore = useUserStore();
 
-workshopStore.getWorkShops().then(() => {
+userStore.getWaitList().then(() => {
   isLoaded.value = true;
 });
 

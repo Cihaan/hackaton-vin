@@ -42,7 +42,7 @@ export const useUserStore = defineStore('user', () => {
             pending,
             error,
             refresh
-        } = await useFetch<UserType[]>('http://127.0.0.1:8000/api/users', {
+        } = await useFetch<UserType[]>('http://127.0.0.1:8000/api/reservations', {
             method : 'GET'
         })
         if (data.value) {
