@@ -46,7 +46,7 @@ class Workshop
      */
     #[Assert\Json(message: "You've entered an invalid Json.")]
     #[ORM\Column(type: Types::JSON)]
-    private array $drinkers = [];
+    private ?array $drinkers = null;
 
     /**
      * @var Collection<int, Wine>
@@ -55,7 +55,7 @@ class Workshop
     #[Groups(['workshop:read','workshop:write'])]
     private Collection $wines;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: Types::TEXT)]
     #[Groups(['workshop:read','workshop:write'])]
     private ?string $description = null;
 
@@ -84,7 +84,8 @@ class Workshop
      */
     #[Assert\Json(message: "You've entered an invalid Json.")]
     #[ORM\Column(type: Types::JSON)]
-    private array $theme = [];
+    #[Groups(['workshop:read','workshop:write'])]
+    private ?array $theme = null;
 
     public function __construct()
     {
