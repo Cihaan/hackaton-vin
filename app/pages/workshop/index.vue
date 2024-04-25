@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {ref} from 'vue';
 import {useWorkshopStore} from '~/store/WorkshopStore';
 import Loader from '~/components/Atoms/Loader.vue';
 
