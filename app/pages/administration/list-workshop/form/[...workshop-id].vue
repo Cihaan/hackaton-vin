@@ -164,7 +164,7 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Date atelier" name="date" >
-          <DatePicker v-model="date" required/>
+          <DatePicker :date="date" required/>
         </UFormGroup>
 
         <UFormGroup label="Thèmes" name="theme" >
@@ -172,7 +172,7 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Deadline" name="deadline" >
-          <DatePicker v-model="deadline" required />
+          <DatePicker :date="deadline" required />
         </UFormGroup>
 
         <UFormGroup label="Nombres de places" name="nbPlace" >
@@ -192,13 +192,13 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <!--     changer le non du fichier-->
-        <labe>Choisir bannière</labe>
-        <input type="file" name="file" id="file" @change="handleFileChangeBanner" required
+        <label>Choisir bannière</label>
+        <input type="file" name="file" id="file" @change="handleFileChangeBanner"
                accept="image/png, image/jpeg , image/jpg"
         />
         <img :src="banner" alt="" class="w-1/4 h-1/4" v-if="banner"/>
         <hr class="my-4 border-gray-300"/>
-        <labe>Choisir l'image principale</labe>
+        <label>Choisir l'image principale</label>
         <input type="file" name="file" id="file" @change="handleFileChangeMainImage"
                accept="image/png, image/jpeg , image/jpg"
         />

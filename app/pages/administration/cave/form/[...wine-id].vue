@@ -155,7 +155,7 @@ function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Date limite" name="date" >
-          <DatePicker v-model="limitDate" required/>
+          <DatePicker :date="limitDate" required/>
         </UFormGroup>
 
         <UFormGroup label="Quantité" name="quantite" >
