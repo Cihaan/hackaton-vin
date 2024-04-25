@@ -1,13 +1,12 @@
 <template>
-  <section class="h-fit flex flex-col justify-center bg-primary text-white pt-8 pb-24 px-12">
+  <section class="h-fit flex flex-col justify-center bg-primary text-white pt-8 pb-24 px-12 bg-contain bg-no-repeat bg-[url('~/public/spot.png')] bg-right">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-24">
       <!-- Image column (1/3) -->
-      <div class="col-span-1 lg:col-span-1 flex justify-center items-center">
+      <div class="col-span-1 lg:col-span-1 flex justify-center items-center ">
         <div class="relative w-full">
           <img src="~/public/MR.png" class="w-full justify-center h-auto lg:h-88 object-cover max-w-full" alt="Animateur image">
         </div>
       </div>
-      
       <!-- Description column (2/3) -->
       <div class="col-span-1 lg:col-span-2 flex flex-col justify-center">
         <div class="flex flex-col items-center lg:items-start gap-4">
