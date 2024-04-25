@@ -33,7 +33,9 @@ class WorkshopController extends AbstractController
 //        dd($data['id_workshop'], $data['email']);
         $workshop = $this->workshopRepository->findOneBy(['id' => $data['id_workshop']]);
         $drinker = $this->userRepository->findOneBy(['email' => $data['email']]);
-
+        if ($workshop->getReservations()->count() >= $workshop->getLimitDrinker()){
+            return new Response('error', Response::HTTP_FORBIDDEN);
+        }
         if ($drinker == null) {
             $drinker = new User();
             $drinker->setEmail($data['email']);
