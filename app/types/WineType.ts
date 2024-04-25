@@ -1,5 +1,6 @@
 export type WineType = {
     id?: number;
+    domain?: string | null;
     name: string;
     year: number;
     quantity: number;
@@ -10,6 +11,6 @@ export type WineType = {
     conservation : string;
     limit_date: Date;
     comment: string;
-    grape_varieties : JSON;
+    grape_varieties : string;
 
 }

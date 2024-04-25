@@ -74,9 +74,9 @@ class Wine
     #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
     private ?string $comment = null;
 
-    #[ORM\Column(type: Types::JSON)]
+    #[ORM\Column(length: 255)]
     #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
-    private array $grapeVariety = [];
+    private ?string $grapeVariety = null;
 
     public function __construct()
     {
@@ -248,12 +248,12 @@ class Wine
         return $this;
     }
 
-    public function getGrapeVariety(): array
+    public function getGrapeVariety(): ?string
     {
         return $this->grapeVariety;
     }
 
-    public function setGrapeVariety(array $grapeVariety): static
+    public function setGrapeVariety(string $grapeVariety): static
     {
         $this->grapeVariety = $grapeVariety;
 

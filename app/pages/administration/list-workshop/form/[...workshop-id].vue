@@ -27,9 +27,9 @@ const id = route.params.workshopid
 const title = id ? 'Modification Atelier' : 'Création Atelier'
 
 if(id){
-  useWorkshopStore().getWorkShop(id)
 
   onMounted(async () => {
+    await useWorkshopStore().getWorkShop(id)
     const workshopDetail = useWorkshopStore().workshopDetail
     if(workshopDetail)
     {

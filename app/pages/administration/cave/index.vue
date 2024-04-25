@@ -4,41 +4,57 @@ import NavAdministration from "~/components/Administrations/NavAdministration.vu
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
 import {format} from "date-fns";
+import {useWineStore} from "~/store/WineStore";
 
 const columns = [
   {
     key: 'name',
-    label: 'Atelier'
+    label: 'Vin'
   },
   {
-    key: 'date',
-    label: 'Date'
+    key: 'picture',
+    label: 'Photo'
   },
   {
-    key: 'school_id',
-    label: 'Lieu'
+    key: 'domain.name',
+    label: 'Région'
   },
   {
-    key: 'limitDrinker',
-    label: 'Nombres Places'
-  },
-  {
-    key: 'theme',
-    label: 'Thème'
-  }
-  , {
-    key: 'description',
-    label: 'Description'
-  }
-  , {
     key: 'deadline',
-    label: 'Deadline'
+    label: 'Date limite'
+  },
+  {
+    key: 'year',
+    label: 'Année'
+  },
+  {
+    key: 'quantity',
+    label: 'Quantité'
+  },
+  {
+    key: 'type',
+    label: 'Type'
   }
   , {
-    key: 'price',
-    label: 'Prix'
+    key: 'serviceTemperature',
+    label: 'Température de service'
   }
-
+  , {
+    key: 'serviceKind',
+    label: 'Type de service'
+  }
+  , {
+    key: 'conservation',
+    label: 'Conservation'
+  }
+  , {
+    key: 'grapeVariety',
+    label: 'Variété'
+  }
+  , {
+    key: 'comment',
+    label: 'Notes'
+  }
   , {
     key: 'actions',
     label: 'Actions'
@@ -47,9 +63,9 @@ const columns = [
 
 const selectedColumns = ref([...columns])
 const isLoaded = ref(false);
-const workshopStore = useWorkshopStore();
+const wineStore = useWineStore();
 
-workshopStore.getWorkShops().then(() => {
+wineStore.getWines().then(() => {
   isLoaded.value = true;
 });
 
@@ -72,11 +88,11 @@ definePageMeta({
 
           <USelectMenu v-model="selectedColumns" :options="columns" multiple placeholder="Columns" />
 
-          <UButton icon="i-heroicons-document-plus-20-solid" label="Ajouter un atelier" class="ml-auto" to="/administration/list-workshop/form" />
+          <UButton icon="i-heroicons-document-plus-20-solid" label="Ajouter une bouteille de vin" class="ml-auto" to="/administration/cave/form" />
 
         </div>
 
-        <UTable :columns="selectedColumns" :rows="useWorkshopStore().listWorkshop" >
+        <UTable :columns="selectedColumns" :rows="useWineStore().listWine" >
 
           <template #date-data="{ row }">
             <p>{{ row.date ? format(new Date(row.date), 'dd/MM/yyyy') : '' }}</p>
@@ -86,16 +102,19 @@ definePageMeta({
             <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
           </template>
 
+
+          <template #picture-data="{ row }">
+            <img :src="row.picture" alt="" class="w-20" />
+          </template>
+
           <template #actions-data="{ row }">
-            <NuxtLink :to="`list-workshop/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
+            <NuxtLink :to="`cave/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
           </template>
 
         </UTable>
       </div>
     </div>
   </transition>
-
-
 
 </template>
 

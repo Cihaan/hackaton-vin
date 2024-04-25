@@ -47,7 +47,7 @@ function clearLocalStorage() {
             <LinkNav to="/workshop">Ateliers</LinkNav>
           </li>
           <li>
-            <LinkNav to="/administration/list-workshop">Administration</LinkNav>
+            <LinkNav to="/administration/list-workshop"><UIcon class="text-2xl align-middle" name="i-heroicons-user-circle-16-solid" /></LinkNav>
           </li>
           <li v-if="userStore.user.email">
             <UButton @click="clearLocalStorage">Log out
@@ -65,7 +65,7 @@ function clearLocalStorage() {
           <LinkNav to="/workshop">Ateliers</LinkNav>
         </li>
         <li>
-          <LinkNav to="/administration/list-workshop">Administration</LinkNav>
+          <LinkNav to="/administration/list-workshop"><UIcon class="text-2xl align-middle" name="i-heroicons-user-circle-16-solid" /></LinkNav>
         </li>
         <li v-if="userStore.user.email">
           <UButton @click="clearLocalStorage">Log out

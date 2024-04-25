@@ -1,6 +1,5 @@
 <script setup lang="ts">
-
-import {DatePicker} from "v-calendar";
+import DatePicker from "~/components/Atoms/DatePicker.vue";
 import {format} from 'date-fns'
 const date = ref(new Date())
 </script>
@@ -14,4 +13,3 @@ const date = ref(new Date())
     </template>
   </UPopover>
 </template>
-
