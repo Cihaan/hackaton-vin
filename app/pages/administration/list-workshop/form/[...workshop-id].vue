@@ -6,7 +6,7 @@ import type {WorkshopType} from "~/types/WorkshopType";
 import DatePicker from "~/components/Atoms/UseDatePicker.vue";
 
 const name = ref('')
-const school = ref()
+const school = ref(0)
 const date = ref(new Date())
 const deadline = ref(new Date())
 const theme = ref('')
@@ -28,12 +28,11 @@ if(id){
   useWorkshopStore().getWorkShop(id)
 
   onMounted(async () => {
-    await useWorkshopStore().workshopDetail
     const workshopDetail = useWorkshopStore().workshopDetail
     if(workshopDetail)
     {
       name.value = workshopDetail.name ?? ''
-      school.value = workshopDetail.school_id
+      school.value = workshopDetail.school.id
       date.value = new Date(workshopDetail.date)
       deadline.value = new Date(workshopDetail.deadline)
       description.value = workshopDetail.description
@@ -54,10 +53,9 @@ console.log(useSchoolStore().listSchool)
 const isOpen = ref(false)
 
 function onSubmitWorkshop(){
-  console.log(date,deadline)
   const workshop : WorkshopType = {
     name: name.value,
-    school_id: school.value,
+    school: 'api/schools/' + school.value,
     date: date.value,
     theme: theme.value,
     description: description.value,
@@ -76,11 +74,10 @@ function onSubmitWorkshop(){
     useWorkshopStore().addWorkShop(workshop)
   }
 
-
-  // setTimeout(() => {
-  //   useWorkshopStore().setMessage('')
-  //   navigateTo('/administration/list-workshop')
-  // }, 2000)
+  setTimeout(() => {
+    useWorkshopStore().setMessage('')
+    navigateTo('/administration/list-workshop')
+  }, 2000)
 
 }
 
@@ -123,7 +120,7 @@ function onSubmitSchool(){
         </UFormGroup>
 
         <UFormGroup label="Etablissement" name="school_id" >
-          <USelect required v-model="school" :loading="useSchoolStore().loading" :options="useSchoolStore().listSchool" option-attribute="name" placeholder="Sélectionner un établissement"/>
+          <USelect required v-model="school" value-attribute="id" :loading="useSchoolStore().loading" :options="useSchoolStore().listSchool" option-attribute="name" placeholder="Sélectionner un établissement"/>
 
           <UButton @click="isOpen = true"  class="mt-4"> Ajouter un établissement</UButton>
         </UFormGroup>
@@ -162,11 +159,11 @@ function onSubmitSchool(){
       </div>
 
       <template #footer>
-        <UButton  :loading="useWorkshopStore().loading" type="submit">
+        <UButton  v-if="!useWorkshopStore().message" :loading="useWorkshopStore().loading" type="submit">
           Enregistrer
         </UButton>
 
-<!--        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />-->
+        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />
 
       </template>
 

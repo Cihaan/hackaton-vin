@@ -9,6 +9,8 @@ export const useUserStore = defineStore('user', () => {
     });
     const waitList = ref<UserType[]>([]);
     const router = useRouter()
+    const loading = ref(false);
+    const message = ref('');
 
     async function login(email: string, password: string) {
         try {
@@ -51,5 +53,28 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    return {user, isError, waitList ,login,getWaitList};
+    async function updateReservation(reservationId: number, reservation: UserType){
+        try {
+            loading.value = true;
+            await $fetch('http://127.0.0.1:8000/api/reservations/' + reservationId, {
+                headers: {
+                    'Content-Type': 'application/merge-patch+json', // Corrected Content-Type
+                    'Accept': 'application/ld+json'
+                },
+                method: 'PATCH',
+                body: reservation
+            });
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setMessage('La réservation a été mise à jour avec succès');
+            loading.value = false;
+        }
+    }
+
+    function setMessage(msg: string) {
+        message.value = msg;
+    }
+
+    return {user, isError, waitList,loading,message ,login,getWaitList, updateReservation,setMessage};
 });

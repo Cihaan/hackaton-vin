@@ -1,6 +1,6 @@
 export type WorkshopType = {
     id?: number;
-    school_id?: number | null;
+    school?: string | null;
     name?: string | null;
     date: Date;
     limitDrinker: number;

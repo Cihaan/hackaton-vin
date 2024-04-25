@@ -30,7 +30,7 @@ class Workshop
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['workshop:read', 'workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write','reservation:read'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(nullable: true)]
@@ -53,7 +53,7 @@ class Workshop
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['workshop:read', 'workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write','reservation:read'])]
     private ?\DateTimeInterface $deadline = null;
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
@@ -61,7 +61,6 @@ class Workshop
     private ?School $school = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    #[Assert\Type(Boolean::class)]
     #[Groups(['workshop:read','workshop:write'])]
     public ?bool $isCanceled = null;
 
