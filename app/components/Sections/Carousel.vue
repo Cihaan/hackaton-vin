@@ -10,18 +10,26 @@ const items = [
 
 // Création d'une variable réactive pour contrôler l'affichage de la section
 const showSection = ref(false);
+// Variable pour le titre de la section
+const sectionTitle = ref("Intéressé par le procédé de vinification ?");
 
 // Fonction pour basculer l'état de l'affichage
 const toggleSection = () => {
   showSection.value = !showSection.value;
+  // Modification du titre en fonction de l'état d'affichage
+  if (showSection.value) {
+    sectionTitle.value = "Procédés de la vinification";
+  } else {
+    sectionTitle.value = "Intéressé par le procédé de vinification ?";
+  }
 };
 </script>
 
 <template>
-  <div classe="">
+  <div>
     <!-- Bouton pour basculer l'affichage de la section -->
     <div class="container flex flex-row justify-between my-10">
-        <h4 class="text-wine-600 text-5xl font-bold">Intéressé par le procédé de vinification ?</h4>
+        <h4 class="text-wine-600 text-5xl font-bold">{{ sectionTitle }}</h4>
         <button @click="toggleSection"
       class="relative inline-flex items-center justify-center p-10 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
       <span
@@ -30,8 +38,8 @@ const toggleSection = () => {
         <img src="~/public/eye.png" alt="Icon" class="w-6 h-6">
       </span>
       <span
-          class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Cliquez mwah</span>
-      <span class="relative invisible">Cliquez mwah</span>
+          class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Cliquez ici</span>
+      <span class="relative invisible">Cliquez ici</span>
     </button>
     </div>
 
