@@ -87,12 +87,10 @@ class Workshop
     #[Groups(['workshop:read', 'workshop:write'])]
     private ?\DateTimeInterface $endDate = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['workshop:read', 'workshop:write'])]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $banner = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['workshop:read', 'workshop:write'])]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $mainImage = null;
 
 
