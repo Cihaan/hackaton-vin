@@ -12,6 +12,18 @@ const columns = [
     label: 'Vin'
   },
   {
+    key: 'picture',
+    label: 'Photo'
+  },
+  {
+    key: 'domain.name',
+    label: 'Région'
+  },
+  {
+    key: 'deadline',
+    label: 'Date limite'
+  },
+  {
     key: 'year',
     label: 'Année'
   },
@@ -22,10 +34,6 @@ const columns = [
   {
     key: 'type',
     label: 'Type'
-  },
-  {
-    key: 'picture',
-    label: 'Photo'
   }
   , {
     key: 'serviceTemperature',
@@ -92,6 +100,11 @@ definePageMeta({
 
           <template #deadline-data="{ row }">
             <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
+          </template>
+
+
+          <template #picture-data="{ row }">
+            <img :src="row.picture" alt="" class="w-20" />
           </template>
 
           <template #actions-data="{ row }">

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import {useSchoolStore} from "~/store/SchoolStore";
-import type {SchoolType} from "~/types/SchoolType";
 import {useWorkshopStore} from "~/store/WorkshopStore";
-import type {WorkshopType} from "~/types/WorkshopType";
 import DatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {useWineStore} from "~/store/WineStore";
 import {useDomainStore} from "~/store/DomainStore";
@@ -21,7 +18,7 @@ const serviceKind = ref('')
 const conservation = ref('')
 const limitDate = ref(new Date())
 const comment = ref('')
-const grapeVarieties = ref()
+const grapeVarieties = ref('')
 
 // domain
 const nameDomain = ref('')
@@ -33,14 +30,15 @@ const id = route.params.wineid
 const title = id ? 'Modification Bouteille Vin' : 'Création Bouteille Vin'
 
 if(id){
-  useWineStore().getWine(id)
 
   onMounted(async () => {
+    await useWineStore().getWine(id)
     const wineDetail = useWineStore().wineDetail
+    console.log(wineDetail.name)
     if(wineDetail)
     {
       name.value = wineDetail.name
-      domain.value = wineDetail.domain
+      domain.value = wineDetail.domain.id
       year.value = wineDetail.year
       quantity.value = wineDetail.quantity
       type.value = wineDetail.type
@@ -50,7 +48,7 @@ if(id){
       conservation.value = wineDetail.conservation
       limitDate.value = new Date(wineDetail.limiteDate)
       comment.value = wineDetail.comment
-      grapeVarieties.value = wineDetail.grapeVarieties
+      grapeVarieties.value = wineDetail.grapeVariety
     }
 
   })
@@ -75,7 +73,7 @@ function onSubmitWine(){
     conservation: conservation.value,
     limiteDate: limitDate.value,
     comment: comment.value,
-    grapeVariety: { "0" : grapeVarieties.value }
+    grapeVariety: grapeVarieties.value
   }
 
   if(id){
@@ -86,7 +84,7 @@ function onSubmitWine(){
   }
 
   setTimeout(() => {
-    useWorkshopStore().setMessage('')
+    useWineStore().setMessage('')
     navigateTo('/administration/cave')
   }, 2000)
 
@@ -170,7 +168,7 @@ function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
 
         <!--     changer le non du fichier-->
         <label>Image Vin</label>
-        <input type="file" name="file" id="file" @change="handleFileChangeBanner" required
+        <input type="file" name="file" id="file" @change="handleFileChangeBanner"
                accept="image/png, image/jpeg , image/jpg"
         />
         <img :src="picture" alt="" class="w-1/4 h-1/4" v-if="picture"/>

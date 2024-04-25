@@ -11,6 +11,6 @@ export type WineType = {
     conservation : string;
     limit_date: Date;
     comment: string;
-    grape_varieties : JSON;
+    grape_varieties : string;
 
 }

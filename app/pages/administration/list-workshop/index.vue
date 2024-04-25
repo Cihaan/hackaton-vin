@@ -11,6 +11,10 @@ const columns = [
   label: 'Atelier'
 },
 {
+  key : 'mainImage',
+  label: 'Photo principale'
+},
+{
   key: 'date',
   label: 'Date'
 },
@@ -89,6 +93,12 @@ definePageMeta({
           <template #deadline-data="{ row }">
             <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
           </template>
+
+
+          <template #mainImage-data="{ row }">
+            <img :src="row.mainImage" alt="" class="w-20" />
+          </template>
+
 
           <template #actions-data="{ row }">
             <NuxtLink :to="`list-workshop/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
