@@ -12,14 +12,21 @@ export const useUserStore = defineStore('user', () => {
     const loading = ref(false);
     const message = ref('');
 
+    const userStorage = localStorage.getItem('user');
+    if (userStorage) {
+        user.value = JSON.parse(userStorage);
+    }
+
     async function login(email: string, password: string) {
         try {
-            const response  = await $fetch<UserType>('http://localhost:8000/api/login', {
+            const response  = await $fetch<any>('http://localhost:8000/api/login', {
                 method: 'POST',
                 body: JSON.stringify({username: email, password})
             });
 
-            user.value.email = response.email;
+            console.log(response);
+
+            user.value.email = response.username;
             user.value.role = response.role;
 
             localStorage.setItem('user', JSON.stringify(user.value));
@@ -31,12 +38,6 @@ export const useUserStore = defineStore('user', () => {
         }
     }
 
-    onMounted(() => {
-        const userStorage = localStorage.getItem('user');
-        if (userStorage) {
-            user.value = JSON.parse(userStorage);
-        }
-    })
 
     async function getWaitList() {
         const {
