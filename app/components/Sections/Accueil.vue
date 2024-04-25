@@ -1,3 +1,8 @@
+<script setup>
+import LinkNav from "~/components/Atoms/LinkNav.vue";
+
+
+</script>
 <template>
   <section class=" px-6 h-screen bg-cover bg-center bg-no-repeat bg-[url('~/public/img/background-vin.png')]">
     <div class="container mx-auto flex flex-col justify-center py-16 lg:py-32 gap-8 lg:gap-24">
@@ -16,8 +21,8 @@
           <span class="text-secondary-500 mx-auto lg:mx-0 text-lg">Voir les Ateliers</span>
         </UButton> -->
 
-        <a href="#_"
-           class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-secondary-500 rounded-lg shadow-md group">
+        <LinkNav to="/workshop"
+           class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-secondary-500 rounded-lg shadow-md group noprint">
           <span
               class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
 
@@ -27,7 +32,7 @@
               class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Voir
             les Ateliers</span>
           <span class="relative invisible">Voir les Ateliers</span>
-        </a>
+        </LinkNav>
 
       </div>
     </div>
