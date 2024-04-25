@@ -11,4 +11,6 @@ export type WorkshopType = {
     price: number;
     location: string;
     isCanceled: boolean;
+    banner: string;
+    mainImage: string;
 }

@@ -15,6 +15,8 @@ const price = ref(0)
 const location = ref('')
 const limitDrinker = ref(0)
 const password = ref('')
+const banner = ref('')
+const mainImage = ref('')
 
 // school
 const nameSchool = ref('')
@@ -24,14 +26,13 @@ const id = route.params.workshopid
 
 const title = id ? 'Modification Atelier' : 'Création Atelier'
 
-if(id){
+if (id) {
   useWorkshopStore().getWorkShop(id)
 
   onMounted(async () => {
     await useWorkshopStore().workshopDetail
     const workshopDetail = useWorkshopStore().workshopDetail
-    if(workshopDetail)
-    {
+    if (workshopDetail) {
       name.value = workshopDetail.name ?? ''
       school.value = workshopDetail.school_id
       date.value = new Date(workshopDetail.date)
@@ -41,6 +42,8 @@ if(id){
       location.value = workshopDetail.location
       limitDrinker.value = workshopDetail.limitDrinker
       password.value = workshopDetail.password
+      banner.value = workshopDetail.banner
+      mainImage.value = workshopDetail.mainImage
     }
 
   })
@@ -53,9 +56,9 @@ useSchoolStore().getSchool()
 console.log(useSchoolStore().listSchool)
 const isOpen = ref(false)
 
-function onSubmitWorkshop(){
-  console.log(date,deadline)
-  const workshop : WorkshopType = {
+function onSubmitWorkshop() {
+  console.log(date, deadline)
+  const workshop: WorkshopType = {
     name: name.value,
     school_id: school.value,
     date: date.value,
@@ -66,13 +69,14 @@ function onSubmitWorkshop(){
     limitDrinker: limitDrinker.value,
     deadline: deadline.value,
     password: password.value,
-    isCanceled : false
+    isCanceled: false,
+    banner: banner.value,
+    mainImage: mainImage.value
   }
 
-  if(id){
+  if (id) {
     useWorkshopStore().updateWorkShop(parseInt(id[0]), workshop)
-  }
-  else {
+  } else {
     useWorkshopStore().addWorkShop(workshop)
   }
 
@@ -84,9 +88,9 @@ function onSubmitWorkshop(){
 
 }
 
-function onSubmitSchool(){
+function onSubmitSchool() {
 
-  const school : SchoolType = {
+  const school: SchoolType = {
     name: nameSchool.value,
   };
   useSchoolStore().addSchool(school)
@@ -98,19 +102,36 @@ function onSubmitSchool(){
   }, 2000)
 
 }
+
+
+function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
+  const selectedFile = event.target.files[0];
+  if (selectedFile) {
+    banner.value = URL.createObjectURL(selectedFile)
+  }
+}
+
+function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
+  const selectedFile = event.target.files[0];
+  if (selectedFile) {
+    mainImage.value = URL.createObjectURL(selectedFile)
+  }
+}
+
 </script>
 
 <template>
 
 
-  <form class="container mx-auto lg:px-0 px-10 mt-10 mb-10" @submit.prevent="onSubmitWorkshop" >
-    <UCard >
+  <form class="container mx-auto lg:px-0 px-10 mt-10 mb-10" @submit.prevent="onSubmitWorkshop">
+    <UCard>
       <template #header>
 
         <div class="flex justify-between items-center">
           <h1 class="text-wine-600 text-3xl py-10 font-bold lg:text-start text-center">{{ title }}</h1>
 
-          <UButton icon="i-heroicons-arrow-long-left-16-solid" label="Retour à la liste" class="h-10" to="/administration/list-workshop" />
+          <UButton icon="i-heroicons-arrow-long-left-16-solid" label="Retour à la liste" class="h-10"
+                   to="/administration/list-workshop"/>
 
         </div>
 
@@ -121,52 +142,66 @@ function onSubmitSchool(){
         <UFormGroup label="Nom Atelier" name="name">
           <UInput v-model="name" required/>
         </UFormGroup>
+        <UFormGroup label="Etablissement" name="school_id">
+          <USelect required v-model="school" :loading="useSchoolStore().loading" :options="useSchoolStore().listSchool"
+                   option-attribute="name" placeholder="Sélectionner un établissement"/>
 
-        <UFormGroup label="Etablissement" name="school_id" >
-          <USelect required v-model="school" :loading="useSchoolStore().loading" :options="useSchoolStore().listSchool" option-attribute="name" placeholder="Sélectionner un établissement"/>
-
-          <UButton @click="isOpen = true"  class="mt-4"> Ajouter un établissement</UButton>
+          <UButton @click="isOpen = true" class="mt-4"> Ajouter un établissement</UButton>
         </UFormGroup>
 
         <UFormGroup label="Rue/Salle" name="location">
-          <UInput v-model="location" required />
+          <UInput v-model="location" required/>
         </UFormGroup>
 
-        <UFormGroup label="Date atelier" name="date" >
+        <UFormGroup label="Date atelier" name="date">
           <DatePicker v-model="date" required/>
         </UFormGroup>
 
-        <UFormGroup label="Thèmes" name="theme" >
-          <UInput v-model="theme" />
+        <UFormGroup label="Thèmes" name="theme">
+          <UInput v-model="theme"/>
         </UFormGroup>
 
-        <UFormGroup label="Deadline" name="deadline" >
-          <DatePicker v-model="deadline" required />
+        <UFormGroup label="Deadline" name="deadline">
+          <DatePicker v-model="deadline" required/>
         </UFormGroup>
 
-        <UFormGroup label="Nombres de places" name="nbPlace" >
-          <UInput v-model="limitDrinker" type="number" required />
+        <UFormGroup label="Nombres de places" name="nbPlace">
+          <UInput v-model="limitDrinker" type="number" required/>
         </UFormGroup>
 
-        <UFormGroup label="Description" name="description" >
+        <UFormGroup label="Description" name="description">
           <UTextarea v-model="description" required/>
         </UFormGroup>
 
-        <UFormGroup label="Prix" name="price" >
+        <UFormGroup label="Prix" name="price">
           <UInput v-model="price" type="number" required/>
         </UFormGroup>
 
-        <UFormGroup label="Mot de passe atelier" name="password" >
+        <UFormGroup label="Mot de passe atelier" name="password">
           <UInput v-model="password" type="text" required/>
         </UFormGroup>
+
+        <!--     changer le non du fichier-->
+        <labe>Choisir bannière</labe>
+        <input type="file" name="file" id="file" @change="handleFileChangeBanner" required
+               accept="image/png, image/jpeg , image/jpg"
+        />
+        <img :src="banner" alt="" class="w-1/4 h-1/4" v-if="banner"/>
+        <hr class="my-4 border-gray-300"/>
+        <labe>Choisir l'image principale</labe>
+        <input type="file" name="file" id="file" @change="handleFileChangeMainImage"
+               accept="image/png, image/jpeg , image/jpg"
+        />
+        <img :src="mainImage" alt="" class="w-1/4 h-1/4" v-if="mainImage"/>
+
       </div>
 
       <template #footer>
-        <UButton  :loading="useWorkshopStore().loading" type="submit">
+        <UButton :loading="useWorkshopStore().loading" type="submit">
           Enregistrer
         </UButton>
 
-<!--        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />-->
+        <!--        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />-->
 
       </template>
 
@@ -174,17 +209,19 @@ function onSubmitSchool(){
   </form>
 
   <UModal v-model="isOpen" prevent-close>
-    <form @submit.prevent="onSubmitSchool" >
+    <form @submit.prevent="onSubmitSchool">
       <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
         <template #header>
           <div class="flex items-center justify-between">
             <h3 class="text-base font-bold text-primary">
               Ajout d'un établissement
             </h3>
-            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1" @click="isOpen = false" />
+            <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark-20-solid" class="-my-1"
+                     @click="isOpen = false"/>
           </div>
 
-          <UAlert class="mt-5" icon="i-heroicons-command-line" color="green" v-if="useSchoolStore().message" :title="useSchoolStore().message" />
+          <UAlert class="mt-5" icon="i-heroicons-command-line" color="green" v-if="useSchoolStore().message"
+                  :title="useSchoolStore().message"/>
         </template>
 
 
@@ -195,7 +232,7 @@ function onSubmitSchool(){
         </div>
 
         <template #footer>
-          <UButton  :loading="useSchoolStore().loading" type="submit">
+          <UButton :loading="useSchoolStore().loading" type="submit">
             Enregistrer
           </UButton>
         </template>
@@ -204,3 +241,13 @@ function onSubmitSchool(){
   </UModal>
 
 </template>
+
+<style scoped>
+input[type=file]::file-selector-button {
+  margin-right: 8px;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  @apply rounded-md bg-wine-100 text-white;
+}
+</style>
