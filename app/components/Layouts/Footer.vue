@@ -1,7 +1,7 @@
 <script setup>
 </script>
 <template>
-  <footer class="h-fit bg-black text-white py-8">
+  <footer class="h-fit bg-black text-white py-8 noprint">
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center md:justify-between">
       <div class="flex-1 mb-4 md:mb-0 md:mr-4 text-center">
         <h3 class="text-lg font-semibold mb-2">Contacts :</h3>
