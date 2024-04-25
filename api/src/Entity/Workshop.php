@@ -87,6 +87,9 @@ class Workshop
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'workshop')]
     private Collection $reservations;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $endDate = null;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -283,6 +286,18 @@ class Workshop
                 $reservation->setWorkshop(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEndDate(): ?\DateTimeInterface
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(\DateTimeInterface $endDate): static
+    {
+        $this->endDate = $endDate;
 
         return $this;
     }
