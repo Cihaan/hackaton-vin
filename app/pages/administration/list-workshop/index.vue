@@ -36,7 +36,7 @@ const columns = [
 }
 , {
   key: 'deadline',
-  label: 'Deadline'
+  label: 'Date limite'
 }
 , {
   key: 'price',

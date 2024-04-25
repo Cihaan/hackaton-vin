@@ -22,11 +22,11 @@ const columns = [
   },
   {
     'key': 'workshop.deadline',
-    'label': 'Deadline'
+    'label': 'Date limite'
   },
   {
     key: 'actions',
-    label: 'Actions'
+    label: 'Paiement Validé'
   }
 ]
 
