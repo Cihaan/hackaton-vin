@@ -21,6 +21,31 @@ class WorkshopRepository extends ServiceEntityRepository
         parent::__construct($registry, Workshop::class);
     }
 
+    public function findPastDate(\DateTimeInterface $date): array
+    {
+        return $this->createQueryBuilder('w')
+            ->andWhere('w.date <= :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @param \DateTimeInterface $date
+     * @return Workshop[]
+     */
+    public function find24h(\DateTimeInterface $date): array
+    {
+        $endDate = (clone $date)->modify('+24 hours');
+
+        return $this->createQueryBuilder('w')
+            ->andWhere('w.date BETWEEN :date AND :endDate')
+            ->setParameter('date', $date)
+            ->setParameter('endDate', $endDate)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Workshop[] Returns an array of Workshop objects
     //     */
