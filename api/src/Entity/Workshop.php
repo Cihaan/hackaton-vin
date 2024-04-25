@@ -61,7 +61,6 @@ class Workshop
     private ?School $school = null;
 
     #[ORM\Column(type: Types::BOOLEAN)]
-    #[Assert\Type(Boolean::class)]
     #[Groups(['workshop:read','workshop:write'])]
     public ?bool $isCanceled = null;
 
@@ -88,9 +87,11 @@ class Workshop
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?string $banner = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?string $mainImage = null;
 
 
