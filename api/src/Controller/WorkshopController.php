@@ -66,9 +66,11 @@ class WorkshopController extends AbstractController
         $email = (new Email())
             ->from('association@duVin.com')
             ->to($data['email'])
-            ->subject('Inscription ateliers')
-            ->text('Inscription ateliers')
-            ->html('Inscription ateliers -> mdp: ' . $workshop->getPassword());
+            ->subject('Inscription à l\'atelier '. $workshop->getName())
+            ->text("Inscription à l'ateliers ". $workshop->getName() . ". Le mot de passe pour y accéder est: " . $workshop->getPassword() .
+                " l'atelier aura lieu le : " . $workshop->getDate()->format('fr') )
+            ->html("Inscription à l'ateliers ". $workshop->getName() . ". Le mot de passe pour y accéder est: " . $workshop->getPassword() .
+                " l'atelier aura lieu le : " . $workshop->getDate()->format('fr') );
 //        dd($email);
 //        dd($email->getBody());
         try {
