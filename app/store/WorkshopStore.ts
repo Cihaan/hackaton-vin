@@ -59,7 +59,7 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
             loading.value = true
             await $fetch('http://127.0.0.1:8000/api/workshops/' + workshopId, {
                 headers: {
-                    'Content-Type': 'application/ld+json',
+                    'Content-Type': 'application/merge-patch+json', // Corrected Content-Type
                     'Accept': 'application/ld+json'
                 },
                 method: 'PATCH',
