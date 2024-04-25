@@ -21,71 +21,67 @@ class Workshop
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'reservation:read'])]
+    #[Groups(['workshop:read', 'workshop:write', 'reservation:read'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?int $limitDrinker = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?string $password = null;
 
     /**
      * @var Collection<int, Wine>
      */
     #[ORM\ManyToMany(targetEntity: Wine::class, inversedBy: 'workshops')]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private Collection $wines;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?\DateTimeInterface $deadline = null;
 
     #[ORM\ManyToOne(inversedBy: 'workshops')]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?School $school = null;
 
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private bool $isCanceled = false;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?string $location = null;
 
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?int $price = null;
 
-    /**
-     * @var array
-     */
-    #[Assert\Json(message: "You've entered an invalid Json.")]
-    #[ORM\Column(type: Types::JSON)]
-    #[Groups(['workshop:read','workshop:write'])]
-    private array $theme = [];
-
+    #[ORM\Column(length: 255)]
+    #[Groups(['workshop:read', 'workshop:write'])]
+    private ?string $theme = null;
     /**
      * @var Collection<int, Reservation>
      */
     #[ORM\OneToMany(targetEntity: Reservation::class, mappedBy: 'workshop')]
     private Collection $reservations;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['workshop:read', 'workshop:write'])]
     private ?\DateTimeInterface $endDate = null;
 
     public function __construct()
@@ -243,19 +239,17 @@ class Workshop
         return $this;
     }
 
-    public function getTheme(): array
+    public function getTheme(): ?string
     {
         return $this->theme;
     }
 
-    public function setTheme(array $theme): static
+    public function setTheme(string $theme): static
     {
         $this->theme = $theme;
 
         return $this;
     }
-
-
 
 
     /**

@@ -42,12 +42,10 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
         <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
         <p class="break-all font-sans pt-6">{{ workshop.description }}</p>
         <h3 class="text-wine-600 text-2xl font-bold pt-6">
-          Différents thèmes vous sont proposés :
+          Le thème qui vous est proposé :
         </h3>
         <ul class="list-disc list-inside">
-          <li v-for=" (theme, index) in workshop.theme" :key="index">
-            {{ theme }}
-          </li>
+          <li>{{ workshop.theme }}</li>
         </ul>
       </div>
     </transition>

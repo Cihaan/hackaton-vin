@@ -5,10 +5,9 @@ export type WorkshopType = {
     date: Date;
     limitDrinker: number;
     password: string;
-    theme: [string];
+    theme?: string | null;
     description: string;
     deadline: Date;
-    drinkers?: [];
     price: number;
     location: string;
     isCanceled: boolean;

@@ -55,12 +55,11 @@ const isOpen = ref(false)
 
 function onSubmitWorkshop(){
   console.log(date,deadline)
-
   const workshop : WorkshopType = {
     name: name.value,
     school_id: school.value,
     date: date.value,
-    theme: ["Ma Première Dégustation : Tour de France"],
+    theme: theme.value,
     description: description.value,
     price: price.value,
     location: location.value,
