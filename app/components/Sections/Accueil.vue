@@ -17,14 +17,14 @@
         </UButton> -->
 
         <a href="#_"
-          class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-secondary-500 rounded-lg shadow-md group">
+           class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-secondary-500 rounded-lg shadow-md group">
           <span
-            class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
+              class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
 
             <img src="~/public/wine.png" alt="Icon" class="w-6 h-6">
           </span>
           <span
-            class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Voir
+              class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Voir
             les Ateliers</span>
           <span class="relative invisible">Voir les Ateliers</span>
         </a>
