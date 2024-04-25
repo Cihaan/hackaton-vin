@@ -1,5 +1,6 @@
 export type WineType = {
     id?: number;
+    domain?: string | null;
     name: string;
     year: number;
     quantity: number;

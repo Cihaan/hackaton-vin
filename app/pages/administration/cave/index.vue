@@ -4,41 +4,49 @@ import NavAdministration from "~/components/Administrations/NavAdministration.vu
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import Loader from "~/components/Atoms/Loader.vue";
 import {format} from "date-fns";
+import {useWineStore} from "~/store/WineStore";
 
 const columns = [
   {
     key: 'name',
-    label: 'Atelier'
+    label: 'Vin'
   },
   {
-    key: 'date',
-    label: 'Date'
+    key: 'year',
+    label: 'Année'
   },
   {
-    key: 'school_id',
-    label: 'Lieu'
+    key: 'quantity',
+    label: 'Quantité'
   },
   {
-    key: 'limitDrinker',
-    label: 'Nombres Places'
+    key: 'type',
+    label: 'Type'
   },
   {
-    key: 'theme',
-    label: 'Thème'
+    key: 'picture',
+    label: 'Photo'
   }
   , {
-    key: 'description',
-    label: 'Description'
+    key: 'serviceTemperature',
+    label: 'Température de service'
   }
   , {
-    key: 'deadline',
-    label: 'Deadline'
+    key: 'serviceKind',
+    label: 'Type de service'
   }
   , {
-    key: 'price',
-    label: 'Prix'
+    key: 'conservation',
+    label: 'Conservation'
   }
-
+  , {
+    key: 'grapeVariety',
+    label: 'Variété'
+  }
+  , {
+    key: 'comment',
+    label: 'Notes'
+  }
   , {
     key: 'actions',
     label: 'Actions'
@@ -47,9 +55,9 @@ const columns = [
 
 const selectedColumns = ref([...columns])
 const isLoaded = ref(false);
-const workshopStore = useWorkshopStore();
+const wineStore = useWineStore();
 
-workshopStore.getWorkShops().then(() => {
+wineStore.getWines().then(() => {
   isLoaded.value = true;
 });
 
@@ -72,11 +80,11 @@ definePageMeta({
 
           <USelectMenu v-model="selectedColumns" :options="columns" multiple placeholder="Columns" />
 
-          <UButton icon="i-heroicons-document-plus-20-solid" label="Ajouter un atelier" class="ml-auto" to="/administration/list-workshop/form" />
+          <UButton icon="i-heroicons-document-plus-20-solid" label="Ajouter une bouteille de vin" class="ml-auto" to="/administration/cave/form" />
 
         </div>
 
-        <UTable :columns="selectedColumns" :rows="useWorkshopStore().listWorkshop" >
+        <UTable :columns="selectedColumns" :rows="useWineStore().listWine" >
 
           <template #date-data="{ row }">
             <p>{{ row.date ? format(new Date(row.date), 'dd/MM/yyyy') : '' }}</p>
@@ -87,15 +95,13 @@ definePageMeta({
           </template>
 
           <template #actions-data="{ row }">
-            <NuxtLink :to="`list-workshop/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
+            <NuxtLink :to="`cave/form/${row.id}`" ><UButton class="mr-4" icon="i-heroicons-pencil-16-solid" /> </NuxtLink>
           </template>
 
         </UTable>
       </div>
     </div>
   </transition>
-
-
 
 </template>
 
