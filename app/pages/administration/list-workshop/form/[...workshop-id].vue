@@ -15,6 +15,8 @@ const price = ref(0)
 const location = ref('')
 const limitDrinker = ref(0)
 const password = ref('')
+const banner = ref('')
+const mainImage = ref('')
 
 // school
 const nameSchool = ref('')
@@ -40,6 +42,8 @@ if(id){
       location.value = workshopDetail.location
       limitDrinker.value = workshopDetail.limitDrinker
       password.value = workshopDetail.password
+      banner.value = workshopDetail.banner
+      mainImage.value = workshopDetail.mainImage
     }
 
   })
@@ -64,7 +68,9 @@ function onSubmitWorkshop(){
     limitDrinker: limitDrinker.value,
     deadline: deadline.value,
     password: password.value,
-    isCanceled : false
+    isCanceled: false,
+    banner: banner.value,
+    mainImage: mainImage.value
   }
 
   if(id){
@@ -95,6 +101,34 @@ function onSubmitSchool(){
   }, 2000)
 
 }
+
+
+function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
+  const selectedFile = event.target.files[0];
+  if (selectedFile) {
+    //to base64
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = () => {
+      banner.value = reader.result as string
+    }
+
+  }
+}
+
+function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
+  const selectedFile = event.target.files[0];
+  if (selectedFile) {
+    //to base64
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = () => {
+      mainImage.value = reader.result as string
+
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -156,6 +190,20 @@ function onSubmitSchool(){
         <UFormGroup label="Mot de passe atelier" name="password" >
           <UInput v-model="password" type="text" required/>
         </UFormGroup>
+
+        <!--     changer le non du fichier-->
+        <labe>Choisir bannière</labe>
+        <input type="file" name="file" id="file" @change="handleFileChangeBanner" required
+               accept="image/png, image/jpeg , image/jpg"
+        />
+        <img :src="banner" alt="" class="w-1/4 h-1/4" v-if="banner"/>
+        <hr class="my-4 border-gray-300"/>
+        <labe>Choisir l'image principale</labe>
+        <input type="file" name="file" id="file" @change="handleFileChangeMainImage"
+               accept="image/png, image/jpeg , image/jpg"
+        />
+        <img :src="mainImage" alt="" class="w-1/4 h-1/4" v-if="mainImage"/>
+
       </div>
 
       <template #footer>
@@ -201,3 +249,13 @@ function onSubmitSchool(){
   </UModal>
 
 </template>
+
+<style scoped>
+input[type=file]::file-selector-button {
+  margin-right: 8px;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  @apply rounded-md bg-wine-100 text-white;
+}
+</style>
