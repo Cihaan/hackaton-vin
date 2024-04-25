@@ -1,5 +1,5 @@
 <template>
-  <section class="h-fit flex flex-col justify-center bg-primary text-white pt-8 pb-24 px-12 bg-contain bg-no-repeat bg-[url('~/public/spot.png')] bg-right">
+  <section class="h-fit flex flex-col justify-center bg-primary text-white pt-8 pb-24 px-12">
     <div class="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-24">
       <!-- Image column (1/3) -->
       <div class="col-span-1 lg:col-span-1 flex justify-center items-center ">
