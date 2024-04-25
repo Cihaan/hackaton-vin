@@ -14,6 +14,7 @@ const description = ref('')
 const price = ref(0)
 const location = ref('')
 const limitDrinker = ref(0)
+const password = ref('')
 
 // school
 const nameSchool = ref('')
@@ -39,6 +40,7 @@ if(id){
       price.value = workshopDetail.price
       location.value = workshopDetail.location
       limitDrinker.value = workshopDetail.limitDrinker
+      password.value = workshopDetail.password
     }
 
   })
@@ -58,17 +60,14 @@ function onSubmitWorkshop(){
     name: name.value,
     school_id: school.value,
     date: date.value,
-    // theme: {
-    //   "0": "smehlee"
-    // },
-    // drinkers: {
-    //   "0": "smehlee"
-    // },
+    theme: ["Ma Première Dégustation : Tour de France"],
     description: description.value,
     price: price.value,
     location: location.value,
     limitDrinker: limitDrinker.value,
     deadline: deadline.value,
+    password: password.value,
+    isCanceled : false
   }
 
   if(id){
@@ -157,14 +156,18 @@ function onSubmitSchool(){
         <UFormGroup label="Prix" name="price" >
           <UInput v-model="price" type="number" required/>
         </UFormGroup>
+
+        <UFormGroup label="Mot de passe atelier" name="password" >
+          <UInput v-model="password" type="text" required/>
+        </UFormGroup>
       </div>
 
       <template #footer>
-        <UButton v-if="!useWorkshopStore().message" :loading="useWorkshopStore().loading" type="submit">
+        <UButton  :loading="useWorkshopStore().loading" type="submit">
           Enregistrer
         </UButton>
 
-        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />
+<!--        <UAlert v-else icon="i-heroicons-command-line" color="green"  :title="useWorkshopStore().message" />-->
 
       </template>
 

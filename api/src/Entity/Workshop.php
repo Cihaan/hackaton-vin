@@ -61,7 +61,7 @@ class Workshop
 
     #[ORM\Column]
     #[Groups(['workshop:read','workshop:write'])]
-    private ?bool $isCanceled = null;
+    private bool $isCanceled = false;
 
     #[ORM\Column(length: 255)]
     #[Groups(['workshop:read','workshop:write'])]
@@ -72,14 +72,12 @@ class Workshop
     private ?int $price = null;
 
     /**
-     * @var string[]
+     * @var array
      */
     #[Assert\Json(message: "You've entered an invalid Json.")]
     #[ORM\Column(type: Types::JSON)]
     #[Groups(['workshop:read','workshop:write'])]
-    private ?array $theme = null;
-
-
+    private array $theme = [];
 
     /**
      * @var Collection<int, Reservation>
@@ -209,7 +207,7 @@ class Workshop
         return $this;
     }
 
-    public function isCanceled(): ?bool
+    public function isCanceled(): bool
     {
         return $this->isCanceled;
     }
