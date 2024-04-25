@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ReservationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ApiResource(
@@ -20,9 +24,10 @@ class Reservation
     #[Groups(['reservation:read','reservation:write'])]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Assert\Type(Boolean::class)]
     #[Groups(['reservation:read','reservation:write'])]
-    private ?bool $isConfirmed = null;
+    public ?bool $isConfirmed = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservations')]
     #[Groups(['reservation:read','reservation:write'])]

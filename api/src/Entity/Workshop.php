@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,7 +22,7 @@ class Workshop
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write'])]
+    #[Groups(['workshop:read','workshop:write','reservation:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -59,9 +60,10 @@ class Workshop
     #[Groups(['workshop:read','workshop:write'])]
     private ?School $school = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Assert\Type(Boolean::class)]
     #[Groups(['workshop:read','workshop:write'])]
-    private ?bool $isCanceled = null;
+    public ?bool $isCanceled = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['workshop:read','workshop:write'])]
