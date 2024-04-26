@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-  <ul class="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
+  <ul class="grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2  gap-y-10 gap-x-6 items-start p-8">
     <li class="relative flex flex-col sm:flex-row xl:flex-col items-start"
         v-for="workshop in listWorkshop" :key="workshop.id">
       <CardWorkshop :workshop="workshop"/>

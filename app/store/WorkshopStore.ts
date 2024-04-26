@@ -12,6 +12,10 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
     const reservationEmail = ref('');
     const reservationModalPaiement = ref(false);
 
+    const debloquerError = ref('');
+    const debloquerModalOpen = ref(false);
+    const debloquerEmail = ref('');
+
     async function getWorkShops() {
         const {data, pending, error, refresh} = await useFetch<WorkshopType[]>('http://127.0.0.1:8000/api/workshops', {});
         if (data.value) {
@@ -114,6 +118,37 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
         }
     }
 
+    async function debloquerWorkShop(id_workshop: string) {
+        try {
+            loading.value = true;
+            await $fetch('http://127.0.0.1:8000/api/inscription', {
+                headers: {
+                    'Content-Type': 'application/ld+json',
+                    'Accept': 'application/ld+json'
+                },
+                method: 'POST',
+                body: {
+                    id_workshop,
+                    mdp: debloquerEmail.value
+                }
+            });
+
+            debloquerError.value = '';
+            debloquerEmail.value = '';
+            debloquerModalOpen.value = false;
+        } catch (e: any) {
+            if (e.statusCode == 403) {
+                debloquerError.value = "Vous êtes déjà inscrit à cet atelier";
+            }
+
+            if (e.statusCode == 500) {
+                debloquerError.value = "Une erreur s'est produite, veuillez réessayer plus tard";
+            }
+            console.log(e);
+        } finally {
+        }
+    }
+
 
     function setMessage(msg: string) {
         message.value = msg;
@@ -133,7 +168,11 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
         reservationModalOpen,
         reservationEmail,
         reservationError,
-        reservationModalPaiement
+        reservationModalPaiement,
+        debloquerError,
+        debloquerModalOpen,
+        debloquerEmail,
+        debloquerWorkShop
     };
 
 });
