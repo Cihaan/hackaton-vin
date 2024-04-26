@@ -159,7 +159,7 @@ function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Quantité" name="quantite" >
-          <UInput v-model="quantity" required />
+          <UInput v-model="quantity" type="number" required />
         </UFormGroup>
 
         <UFormGroup label="Type de Vin" name="type" >
