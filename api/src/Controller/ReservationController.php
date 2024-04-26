@@ -25,24 +25,28 @@ class ReservationController extends AbstractController
         $data = json_decode($request->getContent(), true);
 //        dd($data);
         $reservation = $this->reservationRepository->findOneBy(['id' => $data['reservation_id']]);
-        $reservation->setConfirmed(true);
+        if($reservation->isConfirmed() == false){
+            $reservation->setConfirmed(true);
+            $email = (new Email())
+                ->from('association@duVin.com')
+                ->to($reservation->getDrinker()->getEmail())
+                ->subject('Inscription à l\'atelier '. $reservation->getWorkshop()->getName())
+                ->text("Inscription à l'ateliers ". $reservation->getWorkshop()->getName() . ". Le mot de passe pour y accéder est: " . $reservation->getWorkshop()->getPassword() .
+                    " l'atelier aura lieu le : " . $reservation->getWorkshop()->getDate()->format('fr') )
+                ->html("Inscription à l'ateliers ". $reservation->getWorkshop()->getName() . ". <br> Le mot de passe pour y accéder est: " . $reservation->getWorkshop()->getPassword() .
+                    "<br> l'atelier aura lieu le : " . $reservation->getWorkshop()->getDate()->format('fr') );
+
+            try {
+                $this->mailer->send($email);
+            }catch (TransportExceptionInterface $e) {
+                dd($e);
+            }
+        }
+        else{
+            $reservation->setConfirmed(false);
+        }
         $this->entityManager->persist($reservation);
         $this->entityManager->flush();
-
-        $email = (new Email())
-            ->from('association@duVin.com')
-            ->to($reservation->getDrinker()->getEmail())
-            ->subject('Inscription à l\'atelier '. $reservation->getWorkshop()->getName())
-            ->text("Inscription à l'ateliers ". $reservation->getWorkshop()->getName() . ". Le mot de passe pour y accéder est: " . $reservation->getWorkshop()->getPassword() .
-                " l'atelier aura lieu le : " . $reservation->getWorkshop()->getDate()->format('fr') )
-            ->html("Inscription à l'ateliers ". $reservation->getWorkshop()->getName() . ". <br> Le mot de passe pour y accéder est: " . $reservation->getWorkshop()->getPassword() .
-                "<br> l'atelier aura lieu le : " . $reservation->getWorkshop()->getDate()->format('fr') );
-
-        try {
-            $this->mailer->send($email);
-        }catch (TransportExceptionInterface $e) {
-            dd($e);
-        }
 
         return new Response('Confirmation réussie', Response::HTTP_OK);
 
