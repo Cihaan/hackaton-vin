@@ -5,8 +5,11 @@ import {ref} from 'vue';
 import {useWorkshopStore} from '~/store/WorkshopStore';
 import Loader from '~/components/Atoms/Loader.vue';
 import DatePicker from "~/components/Atoms/UseDatePicker.vue";
+import {useUserStore} from '~/store/UserStore';
 
 const route = useRoute()
+
+const userStore = useUserStore();
 
 const isOpen = ref(false);
 const email = ref("")
@@ -31,14 +34,14 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
              class="shadow-md rounded-md bg-slate-50 w-full h-64 my-6 object-cover "
         >
         <div class="flex flex-row justify-between items-center mb-10">
-          <p class="text-lg text-gray-500 font-medium text-end font-sans">Participation : {{ workshop.price }}€ par personnes</p>
+          <p class="text-lg text-gray-500 font-medium text-end">Participation : {{ workshop.price }}€ par personnes</p>
 
-          <button @click="workshopStore.reservationModalOpen = true"
+          <button v-if="userStore.user.email === ''" @click="workshopStore.reservationModalOpen = true"
             class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
             <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
             <img src="~/public/calendrier.png" alt="Icon" class="w-6 h-6">
             </span>
-            <span class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Réserver</span>
+            <span  class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Réserver</span>
             <span class="relative invisible">Réserver</span>
           </button>
 
@@ -48,14 +51,22 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
           <h1 class="mb-1 text-3xl  text-wine-600 font-medium">
             {{ workshop.name }}
           </h1>
-          <UFormGroup  name="date" >
-            <DatePicker :disabled="true" :date="new Date(workshop.date)" />
-          </UFormGroup>
-          <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
+          <div class="flex justify-end pt-5 items-center">
+            <IconCSS name="ic:baseline-place" class="text-gray-400"/>
+            <span class="pl-2">{{ workshop.location }}</span>
+          </div>
+          <div class="flex flex-row justify-between w-full mt-5">
+            <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
+            <UFormGroup  name="date" >
+              <DatePicker :disabled="true" :date="new Date(workshop.date)" />
+            </UFormGroup>
+          </div>
+          
           <p class="break-all pt-6">{{ workshop.description }}</p>
+          
 
           <div class="flex justify-between">
-            <div>
+            <div v-if="workshop.theme">
               <h3 class="text-wine-600 text-2xl pt-6 pb-4">
                 Le thème qui vous est proposé :
               </h3>
@@ -64,12 +75,12 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
               </ul>
             </div>
 
-            <div>
+            <div v-if="workshop.wines.length > 0">
               <h3 class="text-wine-600 text-2xl pt-6 pb-4">
                 Les bouteilles de vin :
               </h3>
-              <ul class="list-disc list-inside">
-                <li>{{ workshop.theme }}</li>
+              <ul class="list-disc list-inside" v-for=" (wine, index) in workshop.wines" :key="index">
+                <li>{{ wine.name }} de {{wine.year}}</li>
               </ul>
             </div>
           </div>
@@ -78,15 +89,17 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
           <!--          div qui dissimule la main Image tant qu'il ne s'est pas connecté  -->
           <div v-if="!workshopStore.debloquerisReserved" class="w-full h-96 my-6  bg-gray-200 flex items-center justify-center">
             <button @click="workshopStore.debloquerModalOpen = true"
-                    class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
+                    class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-white text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
             <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
-            <img src="~/public/calendrier.png" alt="Icon" class="w-6 h-6">
+            <img src="~/public/cadenas.png" alt="Icon" class="w-6 h-6">
             </span>
               <span class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Débloquer</span>
               <span class="relative invisible">Débloquer</span>
             </button>
-          </div>      </div>
-    </div>
+          </div>
+          
+        </div>
+      </div>
     </transition>
   </div>
 
@@ -94,7 +107,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
     <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800'}">
       <template #header>
         <h2 class="text-lg font-semibold">Réserver un atelier</h2>
-
+        <p class="text-sm text-gray-500">Un e-mail vous sera envoyé pour confirmer le règlement.</p>
         <UAlert
             v-if="workshopStore.reservationError"
             icon="i-heroicons-shield-exclamation"
@@ -106,12 +119,8 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
       </template>
 
       <UInput v-model="workshopStore.reservationEmail" label="email" placeholder="Saisissez votre email"/>
-
-      <template #footer>
-        <!-- <UButton
-            @click="workshopStore.reserveWorkShop(id[0])"
-        >Valider</UButton> -->
       
+      <template #footer>
         <button @click="workshopStore.reserveWorkShop(id[0])" class="rounded relative inline-flex group items-center justify-center px-2 py-1 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
         <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white group-hover:w-full group-hover:h-full opacity-10"></span>
         <span class="relative">Valider</span>
@@ -143,21 +152,14 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
       <UInput v-model="workshopStore.debloquerEmail" label="password" placeholder="Saisissez le mot de passe de l'atelier"/>
 
       <template #footer>
-        <button @click="workshopStore.debloquerWorkShop(id[0])"
-                class="relative inline-flex items-center justify-center p-1 px-2 py-1 overflow-hidden font-small bg-white text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
-            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
-            <img src="~/public/valider.png" alt="Icon" class="w-6 h-6">
-            </span>
-          <span class="absolute flex items-center justify-center w-full h-full text-black-500 font-medium transition-all duration-300 transform group-hover:translate-x-full ease">Valider</span>
-          <span class="relative invisible">Valider</span>
+        <button @click="workshopStore.debloquerWorkShop(id[0])" class="rounded relative inline-flex group items-center justify-center px-2 py-1 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+          <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white group-hover:w-full group-hover:h-full opacity-10"></span>
+          <span class="relative">Valider</span>
         </button>
-        <button @click="workshopStore.debloquerModalOpen = false"
-                class="relative inline-flex items-center justify-center ml-4 p-1 px-2 py-1 overflow-hidden font-small bg-primary text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
-            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease border-secondary-500">
-            <img src="~/public/annuler.png" alt="Icon" class="w-6 h-6">
-            </span>
-          <span class="absolute flex items-center justify-center w-full h-full text-white font-medium transition-all duration-300 transform group-hover:translate-x-full ease">Annuler</span>
-          <span class="relative invisible">Annuler</span>
+
+        <button @click="workshopStore.debloquerModalOpen = false" class="rounded relative inline-flex group items-center justify-center px-2 py-1 m-1 cursor-pointer border-b-4 border-l-2 active:border-wine-600 active:shadow-none shadow-lg bg-gradient-to-tr from-wine-600 to-wine-500 border-wine-700 text-white">
+          <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white group-hover:w-full group-hover:h-full opacity-10"></span>
+          <span class="relative">Annuler</span>
         </button>
       </template>
     </UCard>

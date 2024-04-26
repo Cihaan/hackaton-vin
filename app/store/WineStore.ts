@@ -7,6 +7,10 @@ export const useWineStore = defineStore('list-wine', () => {
     const wineDetail = ref<WineType | null>(null)
     const loading = ref(false)
     const message = ref('')
+
+    const isModalOpen = ref(false);
+    const currentWine = ref<string>('');
+
     async function getWines() {
         const {
             data,
@@ -62,7 +66,6 @@ export const useWineStore = defineStore('list-wine', () => {
 
     }
 
-
     async function updateWine(wineId: number, wine: WineType) {
         try {
             loading.value = true;
@@ -82,10 +85,30 @@ export const useWineStore = defineStore('list-wine', () => {
         }
     }
 
+    async function deleteWine() {
+        try {
+            loading.value = true
+            await $fetch('http://127.0.0.1:8000/api/wines/' + currentWine.value, {
+                headers: {
+                    'Content-Type': 'application/ld+json',
+                    'Accept': 'application/ld+json'
+                },
+                method: 'DELETE',
+            })
+            await getWines()
+        }
+        catch (e) {
+            console.log(e)
+        }
+        finally {
+            loading.value = false
+            isModalOpen.value = false
+        }
+    }
 
     function setMessage(msg: string) {
         message.value = msg
     }
 
-    return {listWine,loading,message, getWines, getWine, setMessage,addWine, updateWine ,wineDetail}
+    return {listWine,loading,message, getWines, getWine, setMessage,addWine, updateWine ,wineDetail, isModalOpen, deleteWine, currentWine}
 })

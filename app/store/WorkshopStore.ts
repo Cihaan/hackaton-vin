@@ -7,6 +7,9 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
     const loading = ref(false);
     const message = ref('');
 
+    const isModalOpen = ref(false);
+    const currentWorkshop = ref<string>('');
+
     const reservationError = ref('');
     const reservationModalOpen = ref(false);
     const reservationEmail = ref('');
@@ -149,6 +152,27 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
         }
     }
 
+    async function deleteWorkshop() {
+        try {
+            loading.value = true
+            await $fetch('http://127.0.0.1:8000/api/workshops/' + currentWorkshop.value, {
+                headers: {
+                    'Content-Type': 'application/ld+json',
+                    'Accept': 'application/ld+json'
+                },
+                method: 'DELETE',
+            })
+            await getWorkShops()
+        }
+        catch (e) {
+            console.log(e)
+        }
+        finally {
+            loading.value = false
+            isModalOpen.value = false
+        }
+    }
+
 
     function setMessage(msg: string) {
         message.value = msg;
@@ -173,7 +197,10 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
         debloquerError,
         debloquerModalOpen,
         debloquerEmail,
-        debloquerWorkShop
+        debloquerWorkShop,
+        isModalOpen,
+        currentWorkshop,
+        deleteWorkshop
     };
 
 });

@@ -20,24 +20,24 @@ class Wine
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?int $year = null;
 
 
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?int $quantity = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $type = null;
 
     /**
@@ -47,35 +47,35 @@ class Wine
     private Collection $workshops;
 
     #[ORM\ManyToOne(inversedBy: 'wines')]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?Domain $domain = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $picture = null;
 
     #[ORM\Column]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?int $serviceTemperature = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $serviceKind = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $conservation = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?\DateTimeInterface $limiteDate = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $comment = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['workshop:read','workshop:write', 'wine:read', 'wine:write'])]
+    #[Groups(['workshop:read', 'wine:read', 'wine:write'])]
     private ?string $grapeVariety = null;
 
     public function __construct()

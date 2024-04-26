@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {useWorkshopStore} from "~/store/WorkshopStore";
-import DatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {useWineStore} from "~/store/WineStore";
 import {useDomainStore} from "~/store/DomainStore";
 import type {WineType} from "~/types/WineType";
@@ -155,11 +153,11 @@ function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Date limite" name="date" >
-          <DatePicker :date="limitDate" required/>
+          <input type="date" id="start" name="trip-start" :value="limitDate" required />
         </UFormGroup>
 
         <UFormGroup label="Quantité" name="quantite" >
-          <UInput v-model="quantity" required />
+          <UInput v-model="quantity" type="number" required />
         </UFormGroup>
 
         <UFormGroup label="Type de Vin" name="type" >
