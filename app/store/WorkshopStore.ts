@@ -12,6 +12,11 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
     const reservationEmail = ref('');
     const reservationModalPaiement = ref(false);
 
+    const debloquerError = ref('');
+    const debloquerModalOpen = ref(false);
+    const debloquerEmail = ref('');
+    const debloquerisReserved = ref(false);
+
     async function getWorkShops() {
         const {data, pending, error, refresh} = await useFetch<WorkshopType[]>('http://127.0.0.1:8000/api/workshops', {});
         if (data.value) {
@@ -101,7 +106,6 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
             reservationModalOpen.value = false;
             reservationModalPaiement.value = true;
         } catch (e: any) {
-            console.log(e.statusCode);
             if (e.statusCode == 403) {
                 reservationError.value = "Vous êtes déjà inscrit à cet atelier";
             }
@@ -110,6 +114,37 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
                 reservationError.value = "Une erreur s'est produite, veuillez réessayer plus tard";
             }
             console.log(e);
+        } finally {
+        }
+    }
+
+    async function debloquerWorkShop(id_workshop: string) {
+        try {
+            loading.value = true;
+            const response = await $fetch<any>('http://127.0.0.1:8000/api/checkPassword', {
+                headers: {
+                    'Content-Type': 'application/ld+json',
+                    'Accept': 'application/ld+json'
+                },
+                method: 'POST',
+                body: {
+                    workshop_id: id_workshop,
+                    password: debloquerEmail.value
+                }
+            });
+
+            if (response === "1") {
+                debloquerisReserved.value = true;
+                debloquerModalOpen.value = false;
+                debloquerError.value = '';
+            } else {
+                debloquerisReserved.value = false;
+                debloquerError.value = "Le mot de passe est incorrect"
+            }
+
+            debloquerEmail.value = '';
+        } catch (e: any) {
+                debloquerError.value = "Le mot de passe est incorrect";
         } finally {
         }
     }
@@ -123,6 +158,7 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
         listWorkshop,
         loading,
         message,
+        debloquerisReserved,
         getWorkShops,
         getWorkShop,
         setMessage,
@@ -133,7 +169,11 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
         reservationModalOpen,
         reservationEmail,
         reservationError,
-        reservationModalPaiement
+        reservationModalPaiement,
+        debloquerError,
+        debloquerModalOpen,
+        debloquerEmail,
+        debloquerWorkShop
     };
 
 });
