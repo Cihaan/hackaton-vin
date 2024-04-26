@@ -14,4 +14,5 @@ export type WorkshopType = {
     isCanceled: boolean;
     banner: string;
     mainImage: string;
+    wines? : [];
 }

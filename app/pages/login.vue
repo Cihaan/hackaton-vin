@@ -33,7 +33,7 @@ const password = ref('');
           icon="i-heroicons-identification"
           variant="solid"
           title="Formulaire de connexion"
-          description="Vueillez renseigner vos identifiants et mot de passe pour vous connecter à l'application en tant qu'administrateur"
+          description="Veuillez renseigner vos identifiants et mot de passe pour vous connecter à l'application en tant qu'administrateur"
       />
 
         <LoginForm  v-model:email="email" v-model:password="password"/>

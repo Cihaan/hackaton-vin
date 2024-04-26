@@ -1,20 +1,37 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
-import {DatePicker} from "v-calendar";
-import 'v-calendar/dist/style.css'
-const props = defineProps<{
-  date: Date,
-  disabled: boolean
-}>()
+import { DatePicker } from 'v-calendar';
+import 'v-calendar/style.css';
+const props = defineProps({
+  date: {
+    type: Date,
+    required: true
+  },
+  affichageHeure: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const formatDate = ref('dd-MM-yyyy')
+
+if (props.affichageHeure){
+  formatDate.value = 'dd-MM-yyyy HH:mm'
+}
+
+const emit = defineEmits(['update:model-value'])
+const updateDate = (newDate : Date) => {
+  emit('update:model-value',format(newDate, 'yyyy-MM-dd HH:mm:ss'));
+}
+
 </script>
 
 <template>
-  <UPopover :disabled="disabled" :popper="{ placement: 'bottom-start' }">
-    <UButton :disabled="disabled" icon="i-heroicons-calendar-days-20-solid" :label="format(date, 'd MMM, yyy')" />
+  <UPopover :popper="{ placement: 'bottom-start' }">
+    <UButton class="bg-primary" icon="i-heroicons-calendar-days-20-solid" :label="format(date, formatDate)" locale="fr" />
 
     <template #panel="{ close }">
-      <DatePicker :disabled="disabled" :v-model="date" is-required @close="close" />
+      <DatePicker :v-model="date" :mode="affichageHeure ? 'datetime' : 'date'" @update:model-value="updateDate" @close="close"  />
     </template>
   </UPopover>
 </template>
-
