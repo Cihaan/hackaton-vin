@@ -60,20 +60,7 @@ class WorkshopController extends AbstractController
 
         $this->entityManager->flush();
 
-        $email = (new Email())
-            ->from('association@duVin.com')
-            ->to($data['email'])
-            ->subject('Inscription à l\'atelier '. $workshop->getName())
-            ->text("Inscription à l'ateliers ". $workshop->getName() . ". Le mot de passe pour y accéder est: " . $workshop->getPassword() .
-                " l'atelier aura lieu le : " . $workshop->getDate()->format('fr') )
-            ->html("Inscription à l'ateliers ". $workshop->getName() . ". <br> Le mot de passe pour y accéder est: " . $workshop->getPassword() .
-                "<br> l'atelier aura lieu le : " . $workshop->getDate()->format('fr') );
 
-        try {
-            $mailer->send($email);
-        }catch (TransportExceptionInterface $e) {
-            dd($e);
-        }
         return new Response('Inscription réussie', Response::HTTP_OK);
     }
 
