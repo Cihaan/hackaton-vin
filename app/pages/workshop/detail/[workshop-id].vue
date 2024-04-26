@@ -104,7 +104,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
     <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800'}">
       <template #header>
         <h2 class="text-lg font-semibold">Réserver un atelier</h2>
-        <p class="text-sm text-gray-500">Un e-mail vous sera envoyé pour confirmer le règlement.</p>
+        <p class="text-sm text-gray-500 mt-2">Un e-mail vous sera envoyé pour confirmer le règlement.</p>
         <UAlert
             v-if="workshopStore.reservationError"
             icon="i-heroicons-shield-exclamation"
