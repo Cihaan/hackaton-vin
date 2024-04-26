@@ -19,7 +19,6 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
   isLoaded.value = true;
   workshop = workshopStore.workshopDetail
 });
-const isReserved = ref(false);
 </script>
 
 <template>
@@ -75,9 +74,9 @@ const isReserved = ref(false);
             </div>
           </div>
 
-          <img :src="workshop.mainImage" alt="" class="w-full h-1/2 my-6 object-cover" v-if="isReserved"/>
+          <img :src="workshop.mainImage" alt="" class="w-full h-1/2 my-6 object-cover" v-if="workshopStore.debloquerisReserved"/>
           <!--          div qui dissimule la main Image tant qu'il ne s'est pas connecté  -->
-          <div v-if="!isReserved" class="w-full h-96 my-6  bg-gray-200 flex items-center justify-center">
+          <div v-if="!workshopStore.debloquerisReserved" class="w-full h-96 my-6  bg-gray-200 flex items-center justify-center">
             <button @click="workshopStore.debloquerModalOpen = true"
                     class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
             <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
@@ -112,22 +111,15 @@ const isReserved = ref(false);
         <!-- <UButton
             @click="workshopStore.reserveWorkShop(id[0])"
         >Valider</UButton> -->
-        
-        <button @click="workshopStore.reserveWorkShop(id[0])"
-            class="relative inline-flex items-center justify-center p-1 px-2 py-1 overflow-hidden font-small bg-white text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
-            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
-            <img src="~/public/valider.png" alt="Icon" class="w-6 h-6">
-            </span>
-            <span class="absolute flex items-center justify-center w-full h-full text-black-500 font-medium transition-all duration-300 transform group-hover:translate-x-full ease">Valider</span>
-            <span class="relative invisible">Valider</span>
+      
+        <button @click="workshopStore.reserveWorkShop(id[0])" class="rounded relative inline-flex group items-center justify-center px-2 py-1 m-1 cursor-pointer border-b-4 border-l-2 active:border-green-600 active:shadow-none shadow-lg bg-gradient-to-tr from-green-600 to-green-500 border-green-700 text-white">
+        <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white group-hover:w-full group-hover:h-full opacity-10"></span>
+        <span class="relative">Valider</span>
         </button>
-        <button @click="workshopStore.reservationModalOpen = false"
-            class="relative inline-flex items-center justify-center ml-4 p-1 px-2 py-1 overflow-hidden font-small bg-primary text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
-            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-white group-hover:translate-x-0 ease border-secondary-500">
-            <img src="~/public/annuler.png" alt="Icon" class="w-6 h-6">
-            </span>
-            <span class="absolute flex items-center justify-center w-full h-full text-white font-medium transition-all duration-300 transform group-hover:translate-x-full ease">Annuler</span>
-            <span class="relative invisible">Annuler</span>
+
+        <button @click="workshopStore.reservationModalOpen = false" class="rounded relative inline-flex group items-center justify-center px-2 py-1 m-1 cursor-pointer border-b-4 border-l-2 active:border-wine-600 active:shadow-none shadow-lg bg-gradient-to-tr from-wine-600 to-wine-500 border-wine-700 text-white">
+        <span class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white group-hover:w-full group-hover:h-full opacity-10"></span>
+        <span class="relative">Annuler</span>
         </button>
       </template>
     </UCard>
@@ -148,7 +140,7 @@ const isReserved = ref(false);
         />
       </template>
 
-      <UInput v-model="workshopStore.debloquerEmail" label="email" placeholder="Saisissez le mot de passe de l'atelier"/>
+      <UInput v-model="workshopStore.debloquerEmail" label="password" placeholder="Saisissez le mot de passe de l'atelier"/>
 
       <template #footer>
         <button @click="workshopStore.debloquerWorkShop(id[0])"

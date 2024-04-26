@@ -9,7 +9,7 @@ import LinkNav from "~/components/Atoms/LinkNav.vue";
       <div class="container mx-auto grid grid-cols-1 lg:grid-cols-2 h-4/5 lg:h-auto">
         <div class="flex flex-col items-start gap-4">
           <div class="flex flex-col gap-4 lg:w-3/4 xl:w-full">
-            <h2 class="text-wine-600 text-5xl font-bold">Qu'est-ce qu'un Atelier de vin</h2>
+            <h2 class="text-wine-600 text-5xl font-bold">Qu'est-ce qu'un Atelier de vin ?</h2>
             <p class="text-black text-lg mt-4">À un atelier de dégustation de vin, les participants ont la chance d'explorer et d'approfondir leur connaissance du vin à travers une série d'activités interactives. Sous la guidance d'un sommelier ou d'un expert en vin, les participants apprennent à observer visuellement les vins, à sentir leurs arômes complexes, à savourer les différentes saveurs en bouche, et à discuter de leurs impressions avec les autres participants. Ces ateliers offrent souvent une opportunité unique d'explorer une variété de cépages, de régions viticoles et de styles de vin, permettant ainsi aux participants de développer leurs compétences en dégustation et leur palais. De plus, certains ateliers peuvent inclure des conseils sur l'art d'associer les vins avec les plats pour créer des expériences gastronomiques harmonieuses. En résumé, un atelier de dégustation de vin offre une expérience enrichissante et sensorielle où les amateurs de vin peuvent élargir leurs horizons et approfondir leur appréciation du vin.</p>
             <!-- <UButton
                 class="rounded-none w-full sm:w-4/5 lg:w-3/4 xl:w-2/3"
@@ -30,7 +30,7 @@ import LinkNav from "~/components/Atoms/LinkNav.vue";
         </div>
         <div>
             <img src="~/public/img/atelier1.png" alt="degustation-vin" class="w-50 h-80 object-cover mt-20 lg:mt-0 ml-10 lg:ml-40 shadow-md">
-            <img src="~/public/img/atelier2.png" alt="degustation-vin" class="w-50 h-80 object-cover -mt-10 ml-40 lg:ml-60 shadow-lg">
+            <img src="~/public/img/atelier2.png" alt="degustation-vin" class="w-50 h-80 object-cover -mt-10 ml-40 lg:ml-60 shadow-lg noprint">
         </div>
        
       </div>

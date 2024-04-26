@@ -4,11 +4,11 @@
       <!-- Image column (1/3) -->
       <div class="col-span-1 lg:col-span-1 flex justify-center items-center ">
         <div class="relative w-full">
-          <img src="~/public/MR.png" class="w-full justify-center h-auto lg:h-88 object-cover max-w-full" alt="Animateur image">
+          <img src="~/public/MR.png" class="w-full justify-center h-auto lg:h-88 object-cover max-w-80" alt="Animateur image">
         </div>
       </div>
       <!-- Description column (2/3) -->
-      <div class="col-span-1 lg:col-span-2 flex flex-col justify-center">
+      <div class="col-span-1 lg:col-span-2 flex flex-col justify-start">
         <div class="flex flex-col items-center lg:items-start gap-4">
           <h2 class="text-secondary-500 text-5xl font-bold">Animateur</h2>
           <p class="underline underline-offset-4 font-bold mb-4">BONNETON Olivier</p>
