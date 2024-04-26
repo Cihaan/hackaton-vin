@@ -7,21 +7,13 @@ const props = defineProps({
     type: Date,
     required: true
   },
-  affichageHeure: {
-    type: Boolean,
-    default: false
-  }
 })
 
 const formatDate = ref('dd-MM-yyyy')
 
-if (props.affichageHeure){
-  formatDate.value = 'dd-MM-yyyy HH:mm'
-}
-
-const emit = defineEmits(['update:model-value'])
+const emit = defineEmits(['update:modelValue'])
 const updateDate = (newDate : Date) => {
-  emit('update:model-value',format(newDate, 'yyyy-MM-dd HH:mm:ss'));
+  emit('update:modelValue',format(newDate, 'yyyy-MM-dd'));
 }
 
 </script>
@@ -31,7 +23,7 @@ const updateDate = (newDate : Date) => {
     <UButton class="bg-primary" icon="i-heroicons-calendar-days-20-solid" :label="format(date, formatDate)" locale="fr" />
 
     <template #panel="{ close }">
-      <DatePicker :v-model="date" :mode="affichageHeure ? 'datetime' : 'date'" @update:model-value="updateDate" @close="close"  />
+      <DatePicker :v-model="date" :mode="'date'" @update:model-value="updateDate" @close="close"  />
     </template>
   </UPopover>
 </template>

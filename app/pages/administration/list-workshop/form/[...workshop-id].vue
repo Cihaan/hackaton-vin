@@ -3,8 +3,8 @@ import {useSchoolStore} from "~/store/SchoolStore";
 import type {SchoolType} from "~/types/SchoolType";
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import type {WorkshopType} from "~/types/WorkshopType";
-import DatePicker from "~/components/Atoms/UseDatePicker.vue";
 import {useWineStore} from "~/store/WineStore";
+import {format} from "date-fns";
 
 const name = ref('')
 const school = ref(0)
@@ -34,12 +34,13 @@ if(id){
   onMounted(async () => {
     await useWorkshopStore().getWorkShop(id)
     const workshopDetail = useWorkshopStore().workshopDetail
+
     if(workshopDetail)
     {
       name.value = workshopDetail.name ?? ''
       school.value = workshopDetail.school.id
-      date.value = new Date(workshopDetail.date)
-      deadline.value = new Date(workshopDetail.deadline)
+      date.value = format(new Date(workshopDetail.date), 'yyyy-MM-dd')
+      deadline.value = format(new Date(workshopDetail.deadline), 'yyyy-MM-dd')
       description.value = workshopDetail.description
       price.value = workshopDetail.price
       location.value = workshopDetail.location
@@ -47,13 +48,12 @@ if(id){
       password.value = workshopDetail.password
       banner.value = workshopDetail.banner
       mainImage.value = workshopDetail.mainImage
-      dateEnd.value = new Date(workshopDetail.end_date)
-      wine.value = workshopDetail.wine
+      dateEnd.value = format(new Date(workshopDetail.endDate), 'yyyy-MM-dd')
+      wine.value = workshopDetail?.wines?.map(wine => wine.id) ?? [];
     }
 
   })
 }
-
 
 // Récuperation Etablissement ( ecole )
 useSchoolStore().getSchool()
@@ -63,11 +63,10 @@ const isOpen = ref(false)
 
 function onSubmitWorkshop(){
 
-  const wines = wine.value.map(item => {
+  const wines = wine.value?.map(item => {
     return '/api/wines/' + item
-  } );
+  }) ?? [];
 
-  console.log(wines)
   const workshop : WorkshopType = {
     name: name.value,
     school: 'api/schools/' + school.value,
@@ -82,7 +81,7 @@ function onSubmitWorkshop(){
     isCanceled: false,
     banner: banner.value,
     mainImage: mainImage.value,
-    end_date : dateEnd.value,
+    endDate : dateEnd.value,
     wines : wines
   }
 
@@ -146,6 +145,7 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
 <template>
 
 
+
   <form class="container mx-auto lg:px-0 px-10 mt-10 mb-10" @submit.prevent="onSubmitWorkshop" >
     <UCard >
       <template #header>
@@ -180,11 +180,11 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Date atelier" name="date" >
-          <DatePicker :date="date" @update:model-value="date = $event" required/>
+          <input type="date" id="start" name="trip-start" :value="date" required />
         </UFormGroup>
 
         <UFormGroup label="Date fin atelier" name="dateEnd" >
-          <DatePicker :date="dateEnd" @update:model-value="dateEnd = $event" required/>
+          <input type="date" id="start" name="trip-start" :value="dateEnd" required />
         </UFormGroup>
 
         <UFormGroup label="Thèmes" name="theme" >
@@ -192,7 +192,7 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Deadline" name="deadline" >
-          <DatePicker :date="deadline" @update:model-value="deadline = $event" required />
+          <input type="date" id="start" name="trip-start" :value="deadline" required />
         </UFormGroup>
 
         <UFormGroup label="Nombres de places" name="nbPlace" >

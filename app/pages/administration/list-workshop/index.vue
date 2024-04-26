@@ -24,6 +24,10 @@ const columns = [
     label: 'Date'
   },
   {
+    key: 'endDate',
+    label: 'Date de fin'
+  },
+  {
     key: 'school.name',
     label: 'Etablissement'
   },
@@ -95,6 +99,8 @@ definePageMeta({
           <template #date-data="{ row }">
             <p>{{ row.date ? format(new Date(row.date), 'dd/MM/yyyy') : '' }}</p>
           </template>
+
+
 
           <template #deadline-data="{ row }">
             <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
