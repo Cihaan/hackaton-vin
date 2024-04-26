@@ -4,10 +4,12 @@ import type {SchoolType} from "~/types/SchoolType";
 import {useWorkshopStore} from "~/store/WorkshopStore";
 import type {WorkshopType} from "~/types/WorkshopType";
 import DatePicker from "~/components/Atoms/UseDatePicker.vue";
+import {useWineStore} from "~/store/WineStore";
 
 const name = ref('')
 const school = ref(0)
 const date = ref(new Date())
+const dateEnd = ref(new Date())
 const deadline = ref(new Date())
 const theme = ref('')
 const description = ref('')
@@ -17,6 +19,7 @@ const limitDrinker = ref(0)
 const password = ref('')
 const banner = ref('')
 const mainImage = ref('')
+const wine = ref([])
 
 // school
 const nameSchool = ref('')
@@ -44,6 +47,8 @@ if(id){
       password.value = workshopDetail.password
       banner.value = workshopDetail.banner
       mainImage.value = workshopDetail.mainImage
+      dateEnd.value = new Date(workshopDetail.end_date)
+      wine.value = workshopDetail.wine
     }
 
   })
@@ -52,11 +57,17 @@ if(id){
 
 // Récuperation Etablissement ( ecole )
 useSchoolStore().getSchool()
+useWineStore().getWines()
 
-console.log(useSchoolStore().listSchool)
 const isOpen = ref(false)
 
 function onSubmitWorkshop(){
+
+  const wines = wine.value.map(item => {
+    return '/api/wines/' + item
+  } );
+
+  console.log(wines)
   const workshop : WorkshopType = {
     name: name.value,
     school: 'api/schools/' + school.value,
@@ -70,7 +81,9 @@ function onSubmitWorkshop(){
     password: password.value,
     isCanceled: false,
     banner: banner.value,
-    mainImage: mainImage.value
+    mainImage: mainImage.value,
+    end_date : dateEnd.value,
+    wines : wines
   }
 
   if(id){
@@ -87,9 +100,9 @@ function onSubmitWorkshop(){
 
 }
 
-function onSubmitSchool(){
+function onSubmitSchool() {
 
-  const school : SchoolType = {
+  const school: SchoolType = {
     name: nameSchool.value,
   };
   useSchoolStore().addSchool(school)
@@ -101,7 +114,6 @@ function onSubmitSchool(){
   }, 2000)
 
 }
-
 
 function handleFileChangeBanner(event: { target: { files: any[]; }; }) {
   const selectedFile = event.target.files[0];
@@ -163,8 +175,16 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
           <UInput v-model="location" required />
         </UFormGroup>
 
+        <UFormGroup label="Choix Vin">
+          <USelectMenu value-attribute="id" v-model="wine" :options="useWineStore().listWine" multiple placeholder="Séléction des vins" option-attribute="name" />
+        </UFormGroup>
+
         <UFormGroup label="Date atelier" name="date" >
-          <DatePicker :date="date" required/>
+          <DatePicker :date="date" @update:model-value="date = $event" required/>
+        </UFormGroup>
+
+        <UFormGroup label="Date fin atelier" name="dateEnd" >
+          <DatePicker :date="dateEnd" @update:model-value="dateEnd = $event" required/>
         </UFormGroup>
 
         <UFormGroup label="Thèmes" name="theme" >
@@ -172,7 +192,7 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         </UFormGroup>
 
         <UFormGroup label="Deadline" name="deadline" >
-          <DatePicker :date="deadline" required />
+          <DatePicker :date="deadline" @update:model-value="deadline = $event" required />
         </UFormGroup>
 
         <UFormGroup label="Nombres de places" name="nbPlace" >
@@ -205,6 +225,7 @@ function handleFileChangeMainImage(event: { target: { files: any[]; }; }) {
         <img :src="mainImage" alt="" class="w-1/4 h-1/4" v-if="mainImage"/>
 
       </div>
+
 
       <template #footer>
         <UButton  v-if="!useWorkshopStore().message" :loading="useWorkshopStore().loading" type="submit">
