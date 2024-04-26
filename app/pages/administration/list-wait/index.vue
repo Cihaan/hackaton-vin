@@ -50,9 +50,6 @@ function updateReservation(row : any) {
   }
   useUserStore().updateReservation(row.id,body);
 
-  setTimeout(() => {
-    useUserStore().setMessage('')
-  }, 1500)
 
 }
 </script>

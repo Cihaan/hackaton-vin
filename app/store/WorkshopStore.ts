@@ -63,6 +63,10 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
             loading.value = false;
         }
 
+        setTimeout(() => {
+            setMessage('')
+        }, 1500)
+
     }
 
     async function updateWorkShop(workshopId: number, workshop: WorkshopType) {
@@ -82,6 +86,10 @@ export const useWorkshopStore = defineStore('list-workshop', () => {
             setMessage('L\'atelier a été mise à jour avec succès');
             loading.value = false;
         }
+
+        setTimeout(() => {
+            setMessage('')
+        }, 1500)
     }
 
     async function reserveWorkShop(id_workshop: string) {

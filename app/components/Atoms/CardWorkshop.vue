@@ -26,7 +26,7 @@ defineProps({
       <div class="prose prose-slate prose-sm text-slate-600 mt-2  ">
         <p class="break-all font-sans min-h-32 w-80"> {{ workshop.description }}</p>
 
-        <p class="font-medium">{{ workshop.limitDrinker }} place(s) restante(s)</p>
+        <p class="font-medium"> Atelier limité à {{ workshop.limitDrinker }} personnes</p>
         <p class="text-lg font-medium text-end font-sans">{{ workshop.price }}€/pers</p>
       </div>
       <LinkNav :to="`workshop/detail/${workshop.id}`"
