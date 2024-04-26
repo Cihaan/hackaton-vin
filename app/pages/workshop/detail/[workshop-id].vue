@@ -19,7 +19,6 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
   isLoaded.value = true;
   workshop = workshopStore.workshopDetail
 });
-const isReserved = ref(false);
 </script>
 
 <template>
@@ -75,9 +74,9 @@ const isReserved = ref(false);
             </div>
           </div>
 
-          <img :src="workshop.mainImage" alt="" class="w-full h-1/2 my-6 object-cover" v-if="isReserved"/>
+          <img :src="workshop.mainImage" alt="" class="w-full h-1/2 my-6 object-cover" v-if="workshopStore.debloquerisReserved"/>
           <!--          div qui dissimule la main Image tant qu'il ne s'est pas connecté  -->
-          <div v-if="!isReserved" class="w-full h-96 my-6  bg-gray-200 flex items-center justify-center">
+          <div v-if="!workshopStore.debloquerisReserved" class="w-full h-96 my-6  bg-gray-200 flex items-center justify-center">
             <button @click="workshopStore.debloquerModalOpen = true"
                     class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
             <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-primary-500 group-hover:translate-x-0 ease border-secondary-500">
@@ -141,7 +140,7 @@ const isReserved = ref(false);
         />
       </template>
 
-      <UInput v-model="workshopStore.debloquerEmail" label="email" placeholder="Saisissez le mot de passe de l'atelier"/>
+      <UInput v-model="workshopStore.debloquerEmail" label="password" placeholder="Saisissez le mot de passe de l'atelier"/>
 
       <template #footer>
         <button @click="workshopStore.debloquerWorkShop(id[0])"
