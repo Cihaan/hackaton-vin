@@ -2,7 +2,8 @@ Plateforme de Gestion d'Ateliers de Dégustation de Vins
 Ce projet est une plateforme web permettant la gestion d'ateliers de dégustation de vins, y compris l'inscription en ligne, la gestion de l'inventaire des vins, et la planification des ateliers. La plateforme sera utilisée par des participants pour s'inscrire aux ateliers et par un administrateur (Olivier) pour gérer les ateliers et les vins.
 
 Languages utilisés:
-Nuxt + Tailwind/Symfony
+FRONT: Nuxt + Tailwind
+BACK: Symfony
 
 
 Installation:
@@ -32,6 +33,9 @@ symfony serve
 
 Accédez à l'application dans votre navigateur à l'adresse suivante :
 http://localhost:3000
+
+L'api est disponible à l'adresse suivante:
+http://localhost:8000/api
 
 
 Devs:
