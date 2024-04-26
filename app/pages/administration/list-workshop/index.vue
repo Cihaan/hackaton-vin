@@ -100,7 +100,9 @@ definePageMeta({
             <p>{{ row.date ? format(new Date(row.date), 'dd/MM/yyyy') : '' }}</p>
           </template>
 
-
+          <template #endDate-data="{ row }">
+            <p>{{ row.date ? format(new Date(row.endDate), 'dd/MM/yyyy') : '' }}</p>
+          </template>
 
           <template #deadline-data="{ row }">
             <p>{{ row.deadline ? format(new Date(row.deadline), 'dd/MM/yyyy') : '' }}</p>
@@ -120,11 +122,34 @@ definePageMeta({
             <NuxtLink :to="`list-workshop/form/${row.id}`">
               <UButton class="mr-4" icon="i-heroicons-pencil-16-solid"/>
             </NuxtLink>
+<!--            <UButton icon="i-heroicons-trash-16-solid" @click="useWorkshopStore().currentWorkshop = row.id; useWorkshopStore().isModalOpen = true; "/>-->
+
           </template>
 
         </UTable>
       </div>
+
+      <UModal :model-value="useWorkshopStore().isModalOpen">
+        <UCard>
+          <template #header>
+            <h2 class="text-xl font-bold">Suppression d'un atelier</h2>
+          </template>
+
+          <template #default>
+            <p>Êtes-vous sûr de vouloir supprimer cette atelier ?</p>
+          </template>
+
+          <template #footer>
+            <div class="flex justify-end gap-2">
+              <UButton label="Annuler" variant="outline" @click="useWorkshopStore().isModalOpen = false"/>
+              <UButton label="Supprimer" :loading="useWorkshopStore().loading" @click="useWorkshopStore().deleteWorkshop"/>
+            </div>
+          </template>
+        </UCard>
+      </UModal>
     </div>
+
+
   </transition>
 
 
