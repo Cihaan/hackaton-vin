@@ -31,7 +31,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
              class="shadow-md rounded-md bg-slate-50 w-full h-64 my-6 object-cover "
         >
         <div class="flex flex-row justify-between items-center mb-10">
-          <p class="text-lg text-gray-500 font-medium text-end font-sans">Participation : {{ workshop.price }}€ par personnes</p>
+          <p class="text-lg text-gray-500 font-medium text-end">Participation : {{ workshop.price }}€ par personnes</p>
 
           <button @click="workshopStore.reservationModalOpen = true"
             class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
@@ -48,11 +48,19 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
           <h1 class="mb-1 text-3xl  text-wine-600 font-medium">
             {{ workshop.name }}
           </h1>
-          <UFormGroup  name="date" >
-            <DatePicker :disabled="true" :date="new Date(workshop.date)" />
-          </UFormGroup>
-          <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
+          <div class="flex justify-end pt-5 items-center">
+            <IconCSS name="ic:baseline-place" class="text-gray-400"/>
+            <span class="pl-2">{{ workshop.location }}</span>
+          </div>
+          <div class="flex flex-row justify-between w-full mt-5">
+            <p class="font-medium">Atelier limité à {{ workshop.limitDrinker }} personnes</p>
+            <UFormGroup  name="date" >
+              <DatePicker :disabled="true" :date="new Date(workshop.date)" />
+            </UFormGroup>
+          </div>
+          
           <p class="break-all pt-6">{{ workshop.description }}</p>
+          
 
           <div class="flex justify-between">
             <div v-if="workshop.theme">
@@ -85,8 +93,10 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
               <span class="absolute flex items-center justify-center w-full h-full text-black-500 transition-all duration-300 transform group-hover:translate-x-full ease">Débloquer</span>
               <span class="relative invisible">Débloquer</span>
             </button>
-          </div>      </div>
-    </div>
+          </div>
+          
+        </div>
+      </div>
     </transition>
   </div>
 
@@ -94,7 +104,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
     <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800'}">
       <template #header>
         <h2 class="text-lg font-semibold">Réserver un atelier</h2>
-
+        <p class="text-sm text-gray-500">Un e-mail vous sera envoyé pour confirmer le règlement.</p>
         <UAlert
             v-if="workshopStore.reservationError"
             icon="i-heroicons-shield-exclamation"
@@ -106,7 +116,7 @@ workshopStore.getWorkShop(route.params.workshopid).then(() => {
       </template>
 
       <UInput v-model="workshopStore.reservationEmail" label="email" placeholder="Saisissez votre email"/>
-
+      
       <template #footer>
         <!-- <UButton
             @click="workshopStore.reserveWorkShop(id[0])"
