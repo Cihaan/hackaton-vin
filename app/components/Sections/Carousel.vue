@@ -29,7 +29,7 @@ const toggleSection = () => {
   <div>
     <!-- Bouton pour basculer l'affichage de la section -->
     <div class="container flex flex-row justify-between my-10">
-        <h4 class="text-wine-600 text-5xl font-bold">{{ sectionTitle }}</h4>
+        <h4 :class="{ 'noprint': !showSection }" class="text-wine-600 text-5xl font-bold">{{ sectionTitle }}</h4>
         <button @click="toggleSection"
       class="relative inline-flex items-center justify-center p-10 px-6 py-3 overflow-hidden font-medium bg-secondary-500 text-black-600 transition duration-300 ease-out border-2 border-primary-500 rounded-lg shadow-md group noprint">
       <span
