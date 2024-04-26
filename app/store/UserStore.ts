@@ -19,6 +19,7 @@ export const useUserStore = defineStore('user', () => {
 
     async function login(email: string, password: string) {
         try {
+            loading.value = true
             const response  = await $fetch<any>('http://localhost:8000/api/login', {
                 method: 'POST',
                 body: JSON.stringify({username: email, password})
@@ -35,6 +36,9 @@ export const useUserStore = defineStore('user', () => {
         } catch (e) {
             console.log("ERREUUUUR", e);
             isError.value = true;
+        }
+        finally {
+            loading.value = false
         }
     }
 
@@ -71,6 +75,11 @@ export const useUserStore = defineStore('user', () => {
             setMessage('La réservation a été mise à jour avec succès');
             loading.value = false;
         }
+
+        setTimeout(() => {
+            setMessage('')
+        }, 1500)
+
     }
 
     function setMessage(msg: string) {

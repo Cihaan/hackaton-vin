@@ -42,6 +42,7 @@ const password = ref('');
         <UButton
             @click="userStore.login(email, password)"
             :disabled="email.length === 0 || password.length === 0"
+            :loading="useUserStore().loading"
         >
           Submit
         </UButton>
