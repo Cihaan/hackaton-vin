@@ -31,7 +31,7 @@ class ReservationController extends AbstractController
 
         $email = (new Email())
             ->from('association@duVin.com')
-            ->to($data['email'])
+            ->to($reservation->getDrinker()->getEmail())
             ->subject('Inscription à l\'atelier '. $reservation->getWorkshop()->getName())
             ->text("Inscription à l'ateliers ". $reservation->getWorkshop()->getName() . ". Le mot de passe pour y accéder est: " . $reservation->getWorkshop()->getPassword() .
                 " l'atelier aura lieu le : " . $reservation->getWorkshop()->getDate()->format('fr') )
